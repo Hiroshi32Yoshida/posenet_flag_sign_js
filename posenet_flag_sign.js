@@ -80,16 +80,9 @@ function detectPoseInRealTime(video, net) {
 	ctx.fillText(printLimit, 670, 70);
 	ctx.fill();
 
-	if (timeLimit == 0) {
-	    ctx.font = fontLayout;
-	    ctx.fillStyle = "red";
-	    ctx.fillText("TIME UP", 300, 300);
-	    ctx.fill();
-	} else {
-            poses.forEach(({ s, keypoints }) => {
-		drawBP(keypoints[0],keypoints[1],ctx);
-            });
-	}
+        poses.forEach(({ s, keypoints }) => {
+	    drawBP(keypoints[0],keypoints[1],ctx);
+        });
 
 	ctx.font = fontLayout;
 	ctx.fillStyle = "red";
