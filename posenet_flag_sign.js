@@ -35,10 +35,6 @@ async function loadVideo() {
     return video;
 }
 
-/**
- * Loads a the camera to be used in the demo
- *
- */
 async function setupCamera() {
     const video = document.getElementById('video');
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
