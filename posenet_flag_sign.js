@@ -40,31 +40,23 @@ async function loadVideo() {
  *
  */
 async function setupCamera() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    throw new Error(
-        'Browser API navigator.mediaDevices.getUserMedia not available');
-  }
+    const video = document.getElementById('video');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            'audio': false,
+            'video': true});
+        video.srcObject = stream;
 
-  const video = document.getElementById('video');
-  video.width = videoWidth;
-  video.height = videoHeight;
-
-  const mobile = isMobile();
-  const stream = await navigator.mediaDevices.getUserMedia({
-    'audio': false,
-    'video': {
-      facingMode: 'user',
-      width: mobile ? undefined : videoWidth,
-      height: mobile ? undefined : videoHeight,
-    },
-  });
-  video.srcObject = stream;
-
-  return new Promise((resolve) => {
-    video.onloadedmetadata = () => {
-      resolve(video);
-    };
-  });
+        return new Promise(resolve => {
+            video.onloadedmetadata = () => {
+                resolve(video);
+            };
+        });
+    } else {
+        const errorMessage = "This browser does not support video capture, or this device does not have a camera";
+        alert(errorMessage);
+        return Promise.reject(errorMessage);
+    }
 }
 
 function detectPoseInRealTime(video, net) {
