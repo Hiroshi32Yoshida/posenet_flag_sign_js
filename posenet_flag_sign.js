@@ -90,9 +90,6 @@ function detectPoseInRealTime(video, net) {
 	} else {
             poses.forEach(({ s, keypoints }) => {
 		drawBP(keypoints[0],keypoints[1],ctx);
-		drawWristPoint(keypoints[9],ctx);
-		drawWristPoint(keypoints[10],ctx);
-		ballsDecision(ctx,[keypoints[9],keypoints[10]]);
             });
 	}
 
