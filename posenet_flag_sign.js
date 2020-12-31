@@ -4,11 +4,9 @@ const flipHorizontal = false;
 const stats = new Stats();
 const contentWidth = 800;
 const contentHeight = 600;
-const ballNum = 2;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 50px Arial";
 
-let balls = [];
 let score = 0;
 let timeLimit = 200;
 let printLimit = timeLimit / 10;
