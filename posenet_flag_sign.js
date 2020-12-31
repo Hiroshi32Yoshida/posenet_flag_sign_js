@@ -83,6 +83,7 @@ function detectPoseInRealTime(video, net) {
         poses.forEach(({ s, keypoints }) => {
 	    drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
+            drawSkeleton(keypoints, 0.5, ctx);
         });
 
 	ctx.font = fontLayout;
