@@ -159,7 +159,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[POINT.RIGHTSHOULDER].position.x;
    y2 = keypoints[POINT.RIGHTSHOULDER].position.y;
   
-   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 左肩
@@ -170,7 +170,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[POINT.LEFTELBOW].position.x;
    y2 = keypoints[POINT.LEFTELBOW].position.y;
   
-   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 右肩
@@ -181,7 +181,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[POINT.RIGHTELBOW].position.x;
    y2 = keypoints[POINT.RIGHTELBOW].position.y;
   
-   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
    return angles;
