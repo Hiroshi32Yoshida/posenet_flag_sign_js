@@ -88,18 +88,10 @@ function detectPoseInRealTime(video, net) {
 
         ctx.save();
         ctx.scale(-1, 1);
-        ctx.translate(-contentWidth, 0);
+        //ctx.translate(-contentWidth, 0);
         ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
         ctx.restore();
 
-        if (timeLimit % 10 == 0) {
-            printLimit = timeLimit / 10;
-        }
-        ctx.font = fontLayout;
-        ctx.fillStyle = "blue";
-        ctx.fillText(printLimit, 670, 70);
-        ctx.fill();
-        
         let deg;
 
         poses.forEach(({ s, keypoints }) => {
