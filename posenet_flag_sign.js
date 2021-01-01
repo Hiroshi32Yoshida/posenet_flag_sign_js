@@ -73,31 +73,32 @@ function detectPoseInRealTime(video, net) {
         ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
         ctx.restore();
 
-	if (timeLimit % 10 == 0) {
-	    printLimit = timeLimit / 10;
-	}
-	ctx.font = fontLayout;
-	ctx.fillStyle = "blue";
-	ctx.fillText(printLimit, 670, 70);
-    ctx.fill();
-    
-    let deg;
+        if (timeLimit % 10 == 0) {
+            printLimit = timeLimit / 10;
+        }
+        ctx.font = fontLayout;
+        ctx.fillStyle = "blue";
+        ctx.fillText(printLimit, 670, 70);
+        ctx.fill();
+        
+        let deg;
 
         poses.forEach(({ s, keypoints }) => {
-	    drawBP(keypoints[0],keypoints[1],ctx);
+	        drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
             deg = calculate_angles(keypoints);
+
+            ctx.font = fontLayout;
+            ctx.fillStyle = "red";
+            ctx.fillText(deg, 70, 70);
+            ctx.fill();
         });
 
-	ctx.font = fontLayout;
-	ctx.fillStyle = "red";
-	ctx.fillText(deg, 70, 70);
-	ctx.fill();
-	timeLimit -= 1;
-	if(timeLimit <= 0){
-	    timeLimit = 0;
-	}
+        timeLimit -= 1;
+        if(timeLimit <= 0){
+            timeLimit = 0;
+        }
 
         stats.end();
 
