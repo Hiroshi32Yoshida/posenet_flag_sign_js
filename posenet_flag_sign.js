@@ -205,38 +205,14 @@ function getAngles(keypoints) {
    angles.push(deg);
 
    //右ひじの角度
-   //x1 = keypoints[RIGHTWRIST].position.x;
-   //y1 = keypoints[RIGHTWRIST].position.y;
-   //x0 = keypoints[RIGHTELBOW].position.x;
-   //y0 = keypoints[RIGHTELBOW].position.y;
-   //x2 = keypoints[RIGHTSHOULDER].position.x;
-   //y2 = keypoints[RIGHTSHOULDER].position.y;
-  
-   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, 0.5);
    angles.push(deg);
   
    // 左肩
-   //x1 = keypoints[RIGHTSHOULDER].position.x;
-   //y1 = keypoints[RIGHTSHOULDER].position.y;
-   //x0 = keypoints[LEFTSHOULDER].position.x;
-   //y0 = keypoints[LEFTSHOULDER].position.y;
-   //x2 = keypoints[LEFTELBOW].position.x;
-   //y2 = keypoints[LEFTELBOW].position.y;
-  
-   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    deg = calculateInternalAngle(keypoints, LEFTSHOULDER, RIGHTSHOULDER, LEFTELBOW, 0.5);
    angles.push(deg);
   
    // 右肩
-   //x1 = keypoints[LEFTSHOULDER].position.x;
-   //y1 = keypoints[LEFTSHOULDER].position.y;
-   //x0 = keypoints[RIGHTSHOULDER].position.x;
-   //y0 = keypoints[RIGHTSHOULDER].position.y;
-   //x2 = keypoints[RIGHTELBOW].position.x;
-   //y2 = keypoints[RIGHTELBOW].position.y;
-  
-   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, LEFTSHOULDER, RIGHTELBOW, 0.5);
    angles.push(deg);
 
@@ -266,20 +242,20 @@ function calculateInternalAngle(keypoints, point0, point1, point2, minConfidence
     return theta;
 }
 
-const UP = 0;
-const DOWN = 1;
+const UP = 1;
+const DOWN = 2;
 
 function get_positions(keypoints) {
     positions = [];
-    if((keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
-    (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
+    if((keypoints[LEFTELBOW].score > 0.5) && (keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
+    (keypoints[LEFTWRIST].score > 0.5) && (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
         positions.push(UP);  // up
     }else{
         positions.push(DOWN);  // down
     }
 
-    if((keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y) ||
-    (keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y)){
+    if((keypoints[RIGHTELBOW].score > 0.5) && (keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y) ||
+    (keypoints[RIGHTWRIST].score > 0.5) && (keypoints[RIGHTWRIST].position.y < keypoints[RIGHTSHOULDER].position.y)){
         positions.push(UP);  // up
     }else{
         positions.push(DOWN);  // down
