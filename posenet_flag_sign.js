@@ -101,7 +101,8 @@ function detectPoseInRealTime(video, net) {
 
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            ctx.fillText(angles[0].toFixed(1), 70, 70);
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 70, 70);
+            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 70, 80);
             ctx.fill();
         });
 
