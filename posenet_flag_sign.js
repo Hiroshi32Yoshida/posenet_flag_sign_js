@@ -126,10 +126,13 @@ function detectPoseInRealTime(video, net) {
                 }
             }
 
+            //test
+
             // draw strings
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            ctx.fillText(curText, 40, 40);
+            //ctx.fillText(curText, 40, 40);
+            ctx.fillText(keypoints[LEFTELBOW].position.y, 40, 40);
             ctx.fill();
         });
 
