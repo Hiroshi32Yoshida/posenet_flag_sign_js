@@ -193,55 +193,64 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
 function getAngles(keypoints) {
    var angles = [];
 
-   x1 = keypoints[LEFTWRIST].position.x;
-   y1 = keypoints[LEFTWRIST].position.y;
-   x0 = keypoints[LEFTELBOW].position.x;
-   y0 = keypoints[LEFTELBOW].position.y;
-   x2 = keypoints[LEFTSHOULDER].position.x;
-   y2 = keypoints[LEFTSHOULDER].position.y;
+   //x1 = keypoints[LEFTWRIST].position.x;
+   //y1 = keypoints[LEFTWRIST].position.y;
+   //x0 = keypoints[LEFTELBOW].position.x;
+   //y0 = keypoints[LEFTELBOW].position.y;
+   //x2 = keypoints[LEFTSHOULDER].position.x;
+   //y2 = keypoints[LEFTSHOULDER].position.y;
 
-   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER, 0.5);
    angles.push(deg);
 
    //右ひじの角度
-   x1 = keypoints[RIGHTWRIST].position.x;
-   y1 = keypoints[RIGHTWRIST].position.y;
-   x0 = keypoints[RIGHTELBOW].position.x;
-   y0 = keypoints[RIGHTELBOW].position.y;
-   x2 = keypoints[RIGHTSHOULDER].position.x;
-   y2 = keypoints[RIGHTSHOULDER].position.y;
+   //x1 = keypoints[RIGHTWRIST].position.x;
+   //y1 = keypoints[RIGHTWRIST].position.y;
+   //x0 = keypoints[RIGHTELBOW].position.x;
+   //y0 = keypoints[RIGHTELBOW].position.y;
+   //x2 = keypoints[RIGHTSHOULDER].position.x;
+   //y2 = keypoints[RIGHTSHOULDER].position.y;
   
-   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, 0.5);
    angles.push(deg);
   
    // 左肩
-   x1 = keypoints[RIGHTSHOULDER].position.x;
-   y1 = keypoints[RIGHTSHOULDER].position.y;
-   x0 = keypoints[LEFTSHOULDER].position.x;
-   y0 = keypoints[LEFTSHOULDER].position.y;
-   x2 = keypoints[LEFTELBOW].position.x;
-   y2 = keypoints[LEFTELBOW].position.y;
+   //x1 = keypoints[RIGHTSHOULDER].position.x;
+   //y1 = keypoints[RIGHTSHOULDER].position.y;
+   //x0 = keypoints[LEFTSHOULDER].position.x;
+   //y0 = keypoints[LEFTSHOULDER].position.y;
+   //x2 = keypoints[LEFTELBOW].position.x;
+   //y2 = keypoints[LEFTELBOW].position.y;
   
-   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, RIGHTSHOULDER, LEFTELBOW, 0.5);
    angles.push(deg);
   
    // 右肩
-   x1 = keypoints[LEFTSHOULDER].position.x;
-   y1 = keypoints[LEFTSHOULDER].position.y;
-   x0 = keypoints[RIGHTSHOULDER].position.x;
-   y0 = keypoints[RIGHTSHOULDER].position.y;
-   x2 = keypoints[RIGHTELBOW].position.x;
-   y2 = keypoints[RIGHTELBOW].position.y;
+   //x1 = keypoints[LEFTSHOULDER].position.x;
+   //y1 = keypoints[LEFTSHOULDER].position.y;
+   //x0 = keypoints[RIGHTSHOULDER].position.x;
+   //y0 = keypoints[RIGHTSHOULDER].position.y;
+   //x2 = keypoints[RIGHTELBOW].position.x;
+   //y2 = keypoints[RIGHTELBOW].position.y;
   
-   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   //deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, LEFTSHOULDER, RIGHTELBOW, 0.5);
    angles.push(deg);
 
    return angles;
 }
 
-function calculateInternalAngle(x0, x1, x2, y0, y1, y2) {
-    var a = {x:x1-x0,y:y1-y0};
-    var b = {x:x2-x0,y:y2-y0};
+//function calculateInternalAngle(x0, x1, x2, y0, y1, y2) {
+function calculateInternalAngle(keypoints, point0, point1, point2, minConfidence) {
+
+    if(keypoints[point0].score < minConfidence || keypoints[point1] < minConfidence || keypoints[point2] < minConfidence){
+        return -1;
+    }
+    var a = {x:keypoints[point1].position.x-keypoints[point0].position.x, y:keypoints[point1].position.y-keypoints[point0].position.y};
+    var b = {x:keypoints[point2].position.x-keypoints[point0].position.x, y:keypoints[point2].position.y-keypoints[point0].position.y};
     
     var dot = a.x * b.x + a.y * b.y;
     
