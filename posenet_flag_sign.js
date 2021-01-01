@@ -110,6 +110,13 @@ function drawBP(nose, leye, ctx){
     ctx.drawImage(bpface,nose.position.x - nh / 2 , nose.position.y - nh / 1.5, nw, nh);
 }
 
+function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
 /**
  * Draw pose keypoints onto a canvas
  */
