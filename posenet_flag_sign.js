@@ -31,8 +31,6 @@ let count = 0;
 let seq_genkaku = [];
 let curText = '';
 let score = 0;
-let timeLimit = 200;
-let printLimit = timeLimit / 10;
 let bpface = new Image();
 let navScale = 1
 bpface.src = "bp_face.png"
@@ -127,13 +125,11 @@ function detectPoseInRealTime(video, net) {
                     ctx.fill();
                 }
             }
-            //angles = getAngles(keypoints);
 
+            // draw strings
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
             ctx.fillText(curText, 40, 40);
-            //ctx.fillText('left elbow: ' + angles[0].toFixed(1), 70, 70);
-            //ctx.fillText('right elbow: ' + angles[1].toFixed(1), 70, 80);
             ctx.fill();
         });
 
@@ -228,17 +224,13 @@ function calculateInternalAngle(x0, x1, x2, y0, y1, y2) {
     var a = {x:x1-x0,y:y1-y0};
     var b = {x:x2-x0,y:y2-y0};
     
-    //内積
     var dot = a.x * b.x + a.y * b.y;
     
-    //絶対値
     var absA = Math.sqrt(a.x*a.x + a.y*a.y);
     var absB = Math.sqrt(b.x*b.x + b.y*b.y);
     
     //dot = |a||b|cosθという公式より
     var cosTheta = dot / (absA*absB);
-    
-    //すでにベクトルがノーマライズされてたら dotのみでいける
     
     //cosθの逆関数
     var theta = Math.acos(cosTheta) * 180 / Math.PI;
@@ -270,7 +262,7 @@ function judge_genkaku(keypoints){
     // left elbow - right elbow - left shoulder - right shoulder
     if ((150 < angles[0]) && (150 < angles[1]) && (80 < angles[2] < 130) && (80 < angles[3] < 130) && (positions[0] == DOWN) && (positions[1] == DOWN))
         return 0
-    else if (160 < angles[0] && 160 < angles[1] && 160 < angles[2] && 160 < angles[3])
+    else if (160 < angles[0] && 160 < angles[1] && 150 < angles[2] && 150 < angles[3])
         return 1
     else if (150 < angles[0] && 140 < angles[1] && (80 < angles[2] && angles[2] < 145) && (80 < angles[3] && angles[3] < 135) && positions[0] == DOWN && positions[1] == UP)
         return 2
@@ -493,6 +485,8 @@ function judge_kana(text, genkakus) {
         return text + 'ろ';
     else if (strGen == [1, 9])
         return text + 'を';
+    else if (strGen == [2, 9])
+        return text + 'わ';
     else if (strGen == [5, 1])
         return text + 'ん';
     else
