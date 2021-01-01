@@ -7,8 +7,6 @@ const contentHeight = 600;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 50px Arial";
 
-import {drawKeypoints, drawSkeleton} from './posenet_util';
-
 let score = 0;
 let timeLimit = 200;
 let printLimit = timeLimit / 10;
