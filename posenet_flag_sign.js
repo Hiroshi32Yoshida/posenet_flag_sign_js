@@ -130,10 +130,9 @@ function detectPoseInRealTime(video, net) {
             let angles = getAngles(keypoints);
 
             // draw strings
-            ctx.font = "bold 24px Arial";
-            //ctx.font = fontLayout;
+            ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            //ctx.fillText(curText, 40, 40);
+            ctx.fillText(curText, 40, 40);
             /*ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toFixed(1) + ', ' + keypoints[LEFTELBOW].position.x.toFixed(1), 40, 40);
             ctx.fill();
             ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toFixed(1) + ', ' + keypoints[RIGHTELBOW].position.x.toFixed(1), 40, 80);
@@ -142,13 +141,15 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();
             ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toFixed(1) + ', ' + keypoints[RIGHTWRIST].position.x.toFixed(1), 40, 160);
             ctx.fill();*/
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, 40);
+            ctx.font = "24px serif";
+            ctx.fillStyle = "black";
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, 300);
             ctx.fill();
-            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, 80);
+            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, 330);
             ctx.fill();
-            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, 120);
+            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, 360);
             ctx.fill();
-            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, 160);
+            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, 390);
             ctx.fill();
         });
 
@@ -268,7 +269,7 @@ function judge_genkaku(keypoints){
     angles = getAngles(keypoints);
     positions = get_positions(keypoints);
     // left elbow - right elbow - left shoulder - right shoulder
-    if ((150 < angles[0]) && (150 < angles[1]) && (80 < angles[2] < 130) && (80 < angles[3] < 130) && (positions[0] == DOWN) && (positions[1] == DOWN))
+    if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 130) && (80 < angles[3] && angles[3] < 130) && positions[0] == DOWN && positions[1] == DOWN)
         return 0;
     else if (160 < angles[0] && 160 < angles[1] && 160 < angles[2] && 160 < angles[3])
         return 1;
