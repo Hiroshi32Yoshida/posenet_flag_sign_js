@@ -76,7 +76,7 @@ async function setupCamera() {
 function detectPoseInRealTime(video, net) {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const flipHorizontal = true; // since images are being fed from a webcam
+    const flipHorizontal = false; // since images are being fed from a webcam
 
     async function poseDetectionFrame() {
         stats.begin();
@@ -106,7 +106,7 @@ function detectPoseInRealTime(video, net) {
 	        //drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
-            angles = calculate_angles(keypoints);
+            angles = getAngles(keypoints);
 
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
@@ -157,7 +157,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   }
 }
 
-function calculate_angles(keypoints) {
+function getAngles(keypoints) {
    var angles = [];
 
    x1 = keypoints[LEFTWRIST].position.x;
@@ -167,7 +167,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[LEFTSHOULDER].position.x;
    y2 = keypoints[LEFTSHOULDER].position.y;
 
-   deg = inner_Calc(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
    //右ひじの角度
@@ -178,7 +178,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[RIGHTSHOULDER].position.x;
    y2 = keypoints[RIGHTSHOULDER].position.y;
   
-   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 左肩
@@ -189,7 +189,7 @@ function calculate_angles(keypoints) {
    x2 = keypoints[LEFTELBOW].position.x;
    y2 = keypoints[LEFTELBOW].position.y;
   
-   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 右肩
@@ -200,13 +200,13 @@ function calculate_angles(keypoints) {
    x2 = keypoints[RIGHTELBOW].position.x;
    y2 = keypoints[RIGHTELBOW].position.y;
   
-   deg=inner_Calc(x0, x1, x2, y0, y1, y2);
+   deg = calculateInternalAngle(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
    return angles;
 }
 
-function inner_Calc(x0, x1, x2, y0, y1, y2) {
+function calculateInternalAngle(x0, x1, x2, y0, y1, y2) {
     var a = {x:x1-x0,y:y1-y0};
     var b = {x:x2-x0,y:y2-y0};
     
