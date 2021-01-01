@@ -5,7 +5,7 @@ const stats = new Stats();
 const contentWidth = 800;
 const contentHeight = 600;
 const colors = ["red","blue","green"];
-const fontLayout = "bold 40px Arial";
+const fontLayout = "bold 40px serif";
 const color = 'aqua';
 
 const NOSE = 0;
@@ -119,7 +119,7 @@ function detectPoseInRealTime(video, net) {
                 }
 
                 if(count > 4){
-                    ctx.font = "bold 200px Arial";
+                    ctx.font = "bold 200px serif";
                     ctx.fillStyle = "blue";
                     ctx.fillText(genkaku, 200, 200);
                     ctx.fill();
