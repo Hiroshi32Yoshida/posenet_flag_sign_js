@@ -137,11 +137,6 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();
         });
 
-        timeLimit -= 1;
-        if(timeLimit <= 0){
-            timeLimit = 0;
-        }
-
         stats.end();
 
         requestAnimationFrame(poseDetectionFrame);
