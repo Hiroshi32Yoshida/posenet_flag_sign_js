@@ -133,13 +133,13 @@ function detectPoseInRealTime(video, net) {
             //ctx.font = fontLayout;
             ctx.fillStyle = "red";
             //ctx.fillText(curText, 40, 40);
-            ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toString() + ', ' + keypoints[LEFTELBOW].position.x.toString(), 40, 40);
+            ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toFixed(1) + ', ' + keypoints[LEFTELBOW].position.x.toFixed(1), 40, 40);
             ctx.fill();
-            ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toString() + ', ' + keypoints[RIGHTELBOW].position.x.toString(), 40, 80);
+            ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toFixed(1) + ', ' + keypoints[RIGHTELBOW].position.x.toFixed(1), 40, 80);
             ctx.fill();
-            ctx.fillText('left wrist: ' + keypoints[LEFTWRIST].position.y.toString() + ', ' + keypoints[LEFTWRIST].position.x.toString(), 40, 120);
+            ctx.fillText('left wrist: ' + keypoints[LEFTWRIST].position.y.toFixed(1) + ', ' + keypoints[LEFTWRIST].position.x.toFixed(1), 40, 120);
             ctx.fill();
-            ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toString() + ', ' + keypoints[RIGHTWRIST].position.x.toString(), 40, 160);
+            ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toFixed(1) + ', ' + keypoints[RIGHTWRIST].position.x.toFixed(1), 40, 160);
             ctx.fill();
         });
 
