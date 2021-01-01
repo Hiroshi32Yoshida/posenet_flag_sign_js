@@ -26,7 +26,6 @@ const RIGHTKNEE = 14;
 const LEFTANKLE = 15;
 const RIGHTANKLE = 16;
 
-
 let score = 0;
 let timeLimit = 200;
 let printLimit = timeLimit / 10;
@@ -102,7 +101,7 @@ function detectPoseInRealTime(video, net) {
 
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            ctx.fillText(angles[0], 70, 70);
+            ctx.fillText(angles[0].toFixed(1), 70, 70);
             ctx.fill();
         });
 
