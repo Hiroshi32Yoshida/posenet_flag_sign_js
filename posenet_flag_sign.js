@@ -151,6 +151,39 @@ function calculate_angles(keypoints) {
    deg = inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
+   //右ひじの角度
+   x1 = keypoints[10].position.x;
+   y1 = keypoints[10].position.y;
+   x0 = keypoints[8].position.x;
+   y0 = keypoints[8].position.y;
+   x2 = keypoints[6].position.x;
+   y2 = keypoints[6].position.y;
+  
+   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   angles.push(deg);
+  
+   // 左肩
+   x1 = keypoints[6].position.x;
+   y1 = keypoints[6].position.y;
+   x0 = keypoints[5].position.x;
+   y0 = keypoints[5].position.y;
+   x2 = keypoints[7].position.x;
+   y2 = keypoints[7].position.y;
+  
+   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   angles.push(deg);
+  
+   // 右肩
+   x1 = keypoints[5].position.x;
+   y1 = keypoints[5].position.y;
+   x0 = keypoints[6].position.x;
+   y0 = keypoints[6].position.y;
+   x2 = keypoints[8].position.x;
+   y2 = keypoints[8].position.y;
+  
+   deg=np.round(inner_Calc(x0, x1, x2, y0, y1, y2))
+   angles.push(deg);
+
    return angles;
 }
 
