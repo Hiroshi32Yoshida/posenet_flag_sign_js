@@ -8,6 +8,25 @@ const colors = ["red","blue","green"];
 const fontLayout = "bold 50px Arial";
 const color = 'aqua';
 
+const NOSE = 0;
+const LEFTEYE = 1;
+const RIGHTEYE = 2;
+const LEFTEAR = 3;
+const RIGHTEAR = 4;
+const LEFTSHOULDER = 5;
+const RIGHTSHOULDER = 6;
+const LEFTELBOW = 7;
+const RIGHTELBOW = 8;
+const LEFTWRIST = 9;
+const RIGHTWRIST = 10;
+const LEFTHIP = 11;
+const RIGHTHIP = 12;
+const LEFTKNEE = 13;
+const RIGHTKNEE = 14;
+const LEFTANKLE = 15;
+const RIGHTANKLE = 16;
+
+
 let score = 0;
 let timeLimit = 200;
 let printLimit = timeLimit / 10;
@@ -141,71 +160,51 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
 function calculate_angles(keypoints) {
    var angles = [];
 
-   x1 = keypoints[POINT.LEFTWRIST].position.x;
-   y1 = keypoints[POINT.LEFTWRIST].position.y;
-   x0 = keypoints[POINT.LEFTELBOW].position.x;
-   y0 = keypoints[POINT.LEFTELBOW].position.y;
-   x2 = keypoints[POINT.LEFTSHOULDER].position.x;
-   y2 = keypoints[POINT.LEFTSHOULDER].position.y;
+   x1 = keypoints[LEFTWRIST].position.x;
+   y1 = keypoints[LEFTWRIST].position.y;
+   x0 = keypoints[LEFTELBOW].position.x;
+   y0 = keypoints[LEFTELBOW].position.y;
+   x2 = keypoints[LEFTSHOULDER].position.x;
+   y2 = keypoints[LEFTSHOULDER].position.y;
 
    deg = inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
    //右ひじの角度
-   x1 = keypoints[POINT.RIGHTWRIST].position.x;
-   y1 = keypoints[POINT.RIGHTWRIST].position.y;
-   x0 = keypoints[POINT.RIGHTELBOW].position.x;
-   y0 = keypoints[POINT.RIGHTELBOW].position.y;
-   x2 = keypoints[POINT.RIGHTSHOULDER].position.x;
-   y2 = keypoints[POINT.RIGHTSHOULDER].position.y;
+   x1 = keypoints[RIGHTWRIST].position.x;
+   y1 = keypoints[RIGHTWRIST].position.y;
+   x0 = keypoints[RIGHTELBOW].position.x;
+   y0 = keypoints[RIGHTELBOW].position.y;
+   x2 = keypoints[RIGHTSHOULDER].position.x;
+   y2 = keypoints[RIGHTSHOULDER].position.y;
   
    deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 左肩
-   x1 = keypoints[POINT.RIGHTSHOULDER].position.x;
-   y1 = keypoints[POINT.RIGHTSHOULDER].position.y;
-   x0 = keypoints[POINT.LEFTSHOULDER].position.x;
-   y0 = keypoints[POINT.LEFTSHOULDER].position.y;
-   x2 = keypoints[POINT.LEFTELBOW].position.x;
-   y2 = keypoints[POINT.LEFTELBOW].position.y;
+   x1 = keypoints[RIGHTSHOULDER].position.x;
+   y1 = keypoints[RIGHTSHOULDER].position.y;
+   x0 = keypoints[LEFTSHOULDER].position.x;
+   y0 = keypoints[LEFTSHOULDER].position.y;
+   x2 = keypoints[LEFTELBOW].position.x;
+   y2 = keypoints[LEFTELBOW].position.y;
   
    deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
   
    // 右肩
-   x1 = keypoints[POINT.LEFTSHOULDER].position.x;
-   y1 = keypoints[POINT.LEFTSHOULDER].position.y;
-   x0 = keypoints[POINT.RIGHTSHOULDER].position.x;
-   y0 = keypoints[POINT.RIGHTSHOULDER].position.y;
-   x2 = keypoints[POINT.RIGHTELBOW].position.x;
-   y2 = keypoints[POINT.RIGHTELBOW].position.y;
+   x1 = keypoints[LEFTSHOULDER].position.x;
+   y1 = keypoints[LEFTSHOULDER].position.y;
+   x0 = keypoints[RIGHTSHOULDER].position.x;
+   y0 = keypoints[RIGHTSHOULDER].position.y;
+   x2 = keypoints[RIGHTELBOW].position.x;
+   y2 = keypoints[RIGHTELBOW].position.y;
   
    deg=inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
 
    return angles;
 }
-  
-var POINT = defineEnum({
-    NOSE:{ value : 0, string : 'Nose' },
-    LEFTEYE:{ value : 1, string : 'LeftEye'},
-    RIGHTEYE:{ value : 2, string : 'RightEye'},
-    LEFTEAR:{ value : 3, string : 'LeftEar'},
-    RIGHTEAR:{ value : 4, string : 'RightEar'},
-    LEFTSHOULDER:{ value : 5, string : 'LeftShoulder'},
-    RIGHTSHOULDER:{ value : 6, string : 'RightShoulder'},
-    LEFTELBOW:{ value : 7, string : 'LeftElbow'},
-    RIGHTELBOW:{ value : 8, string : 'RightElbow'},
-    LEFTWRIST:{ value : 9, string : 'LeftWrist'},
-    RIGHTWRIST:{ value : 10, string : 'RightWrist'},
-    LEFTHIP:{ value : 11, string : 'LeftHip'},
-    RIGHTHIP:{ value : 12, string : 'RightHip'},
-    LEFTKNEE:{ value : 13, string : 'LeftKnee'},
-    RIGHTKNEE:{ value : 14, string : 'RightKnee'},
-    LEFTANKLE:{ value : 15, string : 'LeftAnkle'},
-    RIGHTANKLE:{ value : 16, string : 'RightAnkle'}
-})
 
 function inner_Calc(x0, x1, x2, y0, y1, y2) {
     var a = {x:x1-x0,y:y1-y0};
