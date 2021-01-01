@@ -85,6 +85,7 @@ function detectPoseInRealTime(video, net) {
 	    drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
+            calculate_angles(keypoints);
         });
 
 	ctx.font = fontLayout;
@@ -132,4 +133,46 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     const {y, x} = keypoint.position;
     drawPoint(ctx, y * scale, x * scale, 3, color);
   }
+}
+
+function calculate_angles(keypoints) {
+   var angles = [];
+
+   x1 = keypoints[9].position.x;
+   y1 = keypoints[9].position.y;
+   x0 = keypoints[7].position.x;
+   y0 = keypoints[7].position.y;
+   x2 = keypoints[5].position.x;
+   y2 = keypoints[5].position.y;
+
+   deg = inner_Calc(x0, x1, x2, y0, y1, y2);
+   angles.push(deg);
+}
+
+const partNames = [
+    'nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder',
+    'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist',
+    'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'
+  ];
+
+function inner_Calc(x0, x1, x2, y0, y1, y2) {
+    var a = {x:x1-x0,y:y1-y0};
+    var b = {x:x2-x0,y:y2-y0};
+    
+    //内積
+    var dot = a.x * b.x + a.y * b.y;
+    
+    //絶対値
+    var absA = Math.sqrt(a.x*a.x + a.y*a.y);
+    var absB = Math.sqrt(b.x*b.x + b.y*b.y);
+    
+    //dot = |a||b|cosθという公式より
+    var cosTheta = dot / (absA*absB);
+    
+    //すでにベクトルがノーマライズされてたら dotのみでいける
+    
+    //cosθの逆関数
+    var theta = Math.acos(cosTheta);
+
+    return theta;
 }
