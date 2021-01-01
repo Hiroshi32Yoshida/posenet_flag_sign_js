@@ -134,8 +134,11 @@ function detectPoseInRealTime(video, net) {
             ctx.fillStyle = "red";
             //ctx.fillText(curText, 40, 40);
             ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toString(), 40, 40);
+            ctx.fill();
             ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toString(), 40, 80);
+            ctx.fill();
             ctx.fillText('left wrist: ' + keypoints[LEFTWRIST].position.y.toString(), 40, 120);
+            ctx.fill();
             ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toString(), 40, 160);
             ctx.fill();
         });
