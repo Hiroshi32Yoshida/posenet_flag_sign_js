@@ -6,6 +6,7 @@ const contentWidth = 800;
 const contentHeight = 600;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 50px Arial";
+const color = 'aqua';
 
 let score = 0;
 let timeLimit = 200;
