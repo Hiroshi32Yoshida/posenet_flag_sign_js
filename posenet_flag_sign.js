@@ -340,57 +340,6 @@ function judge_kana(text, genkakus) {
             default: return text;
         }
     }
-/*
-    switch(strGen){
-        case [9, 3]: return text + 'あ';
-        case [3, 2]: return text + 'い';
-        case [6, 9]: return text + 'う';
-        case [1, -2, 1]: return text + 'え';
-        case [1, 2, 3]: return text + 'お';
-        case [8, 3]: return text + 'か';
-        case [6, 2]: return text + 'き';
-        case [-11, 11]: return text + 'く';
-        case [7, 3]: return text + 'け';
-        case [8, 1]: return text + 'こ';
-        case [1, 12]: return text + 'さ';
-        case [5, 7]: return text + 'し';
-        case [1, 2, 5]: return text + 'す';
-        case [9, 7]: return text + 'せ';
-        case [5, 3]: return text + 'そ';
-        case [-11, 11, 5]: return text + 'た';
-        case [7, -2]: return text + 'ち';
-        case [12, 3]: return text + 'つ';
-        case [6, 3]: return text + 'て';
-        case [2, 5]: return text + 'と';
-        case [1, 3]: return text + 'な';
-        case [6]: return text + 'に';
-        case [9, 4]: return text + 'ぬ';
-        case [9, 2, 1]: return text + 'ね';
-        case [3]: return text + 'の';
-        case [10]: return text + 'は';
-        case [1, 7]: return text + 'ひ';
-        case [9]: return text + 'ふ';
-        case [4]: return text + 'へ';
-        case [1, 2, 10]: return text + 'ほ';
-        case [9, 5]: return text + 'ま';
-        case [6, 1]: return text + 'み';
-        case [7, 5]: return text + 'む';
-        case [3, 5]: return text + 'め';
-        case [6, 7]: return text + 'も';
-        case [8, 4]: return text + 'や';
-        case [9, 1]: return text + 'ゆ';
-        case [8, 6]: return text + 'よ';
-        case [5, 9]: return text + 'ら';
-        case [12]: return text + 'り';
-        case [3, 7]: return text + 'る';
-        case [7]: return text + 'れ';
-        case [7, 8]: return text + 'ろ';
-        case [1, 9]: return text + 'を';
-        case [2, 9]: return text + 'わ';
-        case [5, 1]: return text + 'ん';
-        default: return text;
-    }
-    */
 
     if (strGen == [9, 3])
         return text + 'あ';
