@@ -79,18 +79,20 @@ function detectPoseInRealTime(video, net) {
 	ctx.font = fontLayout;
 	ctx.fillStyle = "blue";
 	ctx.fillText(printLimit, 670, 70);
-	ctx.fill();
+    ctx.fill();
+    
+    let deg;
 
         poses.forEach(({ s, keypoints }) => {
 	    drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
-            calculate_angles(keypoints);
+            deg = calculate_angles(keypoints);
         });
 
 	ctx.font = fontLayout;
 	ctx.fillStyle = "red";
-	ctx.fillText(score, 70, 70);
+	ctx.fillText(deg, 70, 70);
 	ctx.fill();
 	timeLimit -= 1;
 	if(timeLimit <= 0){
