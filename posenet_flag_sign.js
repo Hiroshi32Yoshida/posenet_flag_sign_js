@@ -186,12 +186,26 @@ function calculate_angles(keypoints) {
 
    return angles;
 }
-
-const partNames = [
-    'nose', 'leftEye', 'rightEye', 'leftEar', 'rightEar', 'leftShoulder',
-    'rightShoulder', 'leftElbow', 'rightElbow', 'leftWrist', 'rightWrist',
-    'leftHip', 'rightHip', 'leftKnee', 'rightKnee', 'leftAnkle', 'rightAnkle'
-  ];
+  
+var POINT = defineEnum({
+    NOSE:{ value : 0, string : 'Nose' },
+    LEFTEYE:{ value : 1, string : 'LeftEye'},
+    RIGHTEYE:{ value : 2, string : 'RightEye'},
+    LEFTEAR:{ value : 3, string : 'LeftEar'},
+    RIGHTEAR:{ value : 4, string : 'RightEar'},
+    LEFTSHOULDER:{ value : 5, string : 'LeftShoulder'},
+    RIGHTSHOULDER:{ value : 6, string : 'RightShoulder'},
+    LEFTELBOW:{ value : 7, string : 'LeftElbow'},
+    RIGHTELBOW:{ value : 8, string : 'RightElbow'},
+    LEFTWRIST:{ value : 9, string : 'LeftWrist'},
+    RIGHTWRIST:{ value : 10, string : 'RightWrist'},
+    LEFTHIP:{ value : 11, string : 'LeftHip'},
+    RIGHTHIP:{ value : 12, string : 'RightHip'},
+    LEFTKNEE:{ value : 13, string : 'LeftKnee'},
+    RIGHTKNEE:{ value : 14, string : 'RightKnee'},
+    LEFTANKLE:{ value : 15, string : 'LeftAnkle'},
+    RIGHTANKLE:{ value : 16, string : 'RightAnkle'}
+})
 
 function inner_Calc(x0, x1, x2, y0, y1, y2) {
     var a = {x:x1-x0,y:y1-y0};
