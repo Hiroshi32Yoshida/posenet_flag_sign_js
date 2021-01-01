@@ -129,7 +129,7 @@ function detectPoseInRealTime(video, net) {
             //test
 
             // draw strings
-            ctx.font = "bold 14px Arial";
+            ctx.font = "bold 24px Arial";
             //ctx.font = fontLayout;
             ctx.fillStyle = "red";
             //ctx.fillText(curText, 40, 40);
