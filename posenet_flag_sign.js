@@ -121,7 +121,7 @@ function detectPoseInRealTime(video, net) {
                 if(count > 4){
                     ctx.font = "bold 200px sans-serif";
                     ctx.fillStyle = "blue";
-                    ctx.fillText(genkaku, 200, 200);
+                    ctx.fillText(genkaku, 200, 250);
                     ctx.fill();
                 }
             }
@@ -132,7 +132,7 @@ function detectPoseInRealTime(video, net) {
             // draw strings
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            ctx.fillText(curText, 40, 40);
+            ctx.fillText(curText, 20, 40);
             /*ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toFixed(1) + ', ' + keypoints[LEFTELBOW].position.x.toFixed(1), 40, 40);
             ctx.fill();
             ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toFixed(1) + ', ' + keypoints[RIGHTELBOW].position.x.toFixed(1), 40, 80);
@@ -143,13 +143,13 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();*/
             ctx.font = "24px sans-serif";
             ctx.fillStyle = "blue";
-            ctx.fillText('left elbow angle: ' + angles[0].toFixed(1), 40, contentHeight - 80);
+            ctx.fillText('left elbow angle: ' + angles[0].toFixed(1), 20, contentHeight - 80);
             ctx.fill();
-            ctx.fillText('right elbow angle: ' + angles[1].toFixed(1), 40, contentHeight - 60);
+            ctx.fillText('right elbow angle: ' + angles[1].toFixed(1), 20, contentHeight - 60);
             ctx.fill();
-            ctx.fillText('left shoulder angle: ' + angles[2].toFixed(1), 40, contentHeight - 40);
+            ctx.fillText('left shoulder angle: ' + angles[2].toFixed(1), 20, contentHeight - 40);
             ctx.fill();
-            ctx.fillText('right shoulder angle: ' + angles[3].toFixed(1), 40, contentHeight - 20);
+            ctx.fillText('right shoulder angle: ' + angles[3].toFixed(1), 20, contentHeight - 20);
             ctx.fill();
         });
 
@@ -165,7 +165,7 @@ function drawBP(nose, leye, ctx){
     if (navScale < 1) navScale = 1;
     let nw = bpface.width * navScale;
     let nh = bpface.height * navScale;
-    ctx.drawImage(bpface,nose.position.x - nh / 2 , nose.position.y - nh / 1.5, nw, nh);
+    ctx.drawImage(bpface,nose.position.x - nw / 2 , nose.position.y - nh / 1.5, nw, nh);
 }
 
 function drawPoint(ctx, y, x, r, color) {
