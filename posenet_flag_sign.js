@@ -96,7 +96,7 @@ function detectPoseInRealTime(video, net) {
         let deg;
 
         poses.forEach(({ s, keypoints }) => {
-	        //drawBP(keypoints[0],keypoints[1],ctx);
+	        drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
 
@@ -142,14 +142,14 @@ function detectPoseInRealTime(video, net) {
             ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toFixed(1) + ', ' + keypoints[RIGHTWRIST].position.x.toFixed(1), 40, 160);
             ctx.fill();*/
             ctx.font = "24px sans-serif";
-            ctx.fillStyle = "red";
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, 300);
+            ctx.fillStyle = "blue";
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, contentHeight - 80);
             ctx.fill();
-            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, 330);
+            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, contentHeight - 60);
             ctx.fill();
-            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, 360);
+            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, contentHeight - 40);
             ctx.fill();
-            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, 390);
+            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, contentHeight - 20);
             ctx.fill();
         });
 
