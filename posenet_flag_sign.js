@@ -177,7 +177,7 @@ function inner_Calc(x0, x1, x2, y0, y1, y2) {
     //すでにベクトルがノーマライズされてたら dotのみでいける
     
     //cosθの逆関数
-    var theta = Math.acos(cosTheta);
+    var theta = Math.acos(cosTheta) * 180 / Math.PI;
 
     return theta;
 }
