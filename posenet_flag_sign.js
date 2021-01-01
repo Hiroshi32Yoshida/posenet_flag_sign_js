@@ -251,12 +251,12 @@ const DOWN = 1;
 
 function get_positions(keypoints) {
     positions = [];
-    if(keypoints[LEFTEFBOW].y < keypoints[LEFTSHOULDER].y)
+    if(keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y)
         positions.push(UP);  // up
     else
         positions.push(DOWN);  // down
 
-    if(keypoints[RIGHTELBOW].y < keypoints[RIGHTSHOULDER].y)
+    if(keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y)
         positions.push(UP);  // up
     else
         positions.push(DOWN);  // down
