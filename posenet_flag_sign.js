@@ -127,19 +127,28 @@ function detectPoseInRealTime(video, net) {
             }
 
             //test
+            let angles = getAngles(keypoints);
 
             // draw strings
             ctx.font = "bold 24px Arial";
             //ctx.font = fontLayout;
             ctx.fillStyle = "red";
             //ctx.fillText(curText, 40, 40);
-            ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toFixed(1) + ', ' + keypoints[LEFTELBOW].position.x.toFixed(1), 40, 40);
+            /*ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toFixed(1) + ', ' + keypoints[LEFTELBOW].position.x.toFixed(1), 40, 40);
             ctx.fill();
             ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toFixed(1) + ', ' + keypoints[RIGHTELBOW].position.x.toFixed(1), 40, 80);
             ctx.fill();
             ctx.fillText('left wrist: ' + keypoints[LEFTWRIST].position.y.toFixed(1) + ', ' + keypoints[LEFTWRIST].position.x.toFixed(1), 40, 120);
             ctx.fill();
             ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toFixed(1) + ', ' + keypoints[RIGHTWRIST].position.x.toFixed(1), 40, 160);
+            ctx.fill();*/
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, 40);
+            ctx.fill();
+            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, 80);
+            ctx.fill();
+            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, 120);
+            ctx.fill();
+            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, 160);
             ctx.fill();
         });
 
