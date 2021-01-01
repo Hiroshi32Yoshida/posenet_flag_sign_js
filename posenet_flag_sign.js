@@ -307,11 +307,11 @@ function judge_genkaku(keypoints){
 }
 
 function judge_kana(text, genkakus) {
-    kana_text = '';
-    if (genkakus == [1, 10, 1])
+    strGen = genkakus.toString();
+    if (strGen == [1, 10, 1])
         return '';
    
-    if (genkakus == [13]){
+    if (strGen == [13]){
         if (text.length == 0)
             return text;
        
@@ -355,7 +355,7 @@ function judge_kana(text, genkakus) {
             return;
     }
 
-    if (genkakus == [14]){
+    if (strGen == [14]){
         if (text.length == 0)
             return text;
        
@@ -373,95 +373,95 @@ function judge_kana(text, genkakus) {
             return;
     }
 
-    if (genkakus == [9, 3])
+    if (strGen == [9, 3])
         return text + 'あ';
-    else if (genkakus == [3, 2])
+    else if (strGen == [3, 2])
         return text + 'い';
-    else if (genkakus == [6, 9])
+    else if (strGen == [6, 9])
         return text + 'う';
-    else if (genkakus == [1, -2, 1])
+    else if (strGen == [1, -2, 1])
         return text + 'え';
-    else if (genkakus == [1, 2, 3])
+    else if (strGen == [1, 2, 3])
         return text + 'お';
-    else if (genkakus == [8, 3])
+    else if (strGen == [8, 3])
         return text + 'か';
-    else if (genkakus == [6, 2])
+    else if (strGen == [6, 2])
         return text + 'き';
-    else if (genkakus == [-11, 11])
+    else if (strGen == [-11, 11])
         return text + 'く';
-    else if (genkakus == [7, 3])
+    else if (strGen == [7, 3])
         return text + 'け';
-    else if (genkakus == [8, 1])
+    else if (strGen == [8, 1])
         return text + 'こ';
-    else if (genkakus == [1, 12])
+    else if (strGen == [1, 12])
         return text + 'さ';
-    else if (genkakus == [5, 7])
+    else if (strGen == [5, 7])
         return text + 'し';
-    else if (genkakus == [1, 2, 5])
+    else if (strGen == [1, 2, 5])
         return text + 'す';
-    else if (genkakus == [9, 7])
+    else if (strGen == [9, 7])
         return text + 'せ';
-    else if (genkakus == [5, 3])
+    else if (strGen == [5, 3])
         return text + 'そ';
-    else if (genkakus == [-11, 11, 5])
+    else if (strGen == [-11, 11, 5])
         return text + 'た';
-    else if (genkakus == [7, -2])
+    else if (strGen == [7, -2])
         return text + 'ち';
-    else if (genkakus == [12, 3])
+    else if (strGen == [12, 3])
         return text + 'つ';
-    else if (genkakus == [6, 3])
+    else if (strGen == [6, 3])
         return text + 'て';
-    else if (genkakus == [2, 5])
+    else if (strGen == [2, 5])
         return text + 'と';
-    else if (genkakus == [1, 3])
+    else if (strGen == [1, 3])
         return text + 'な';
-    else if (genkakus == [6])
+    else if (strGen == [6])
         return text + 'に';
-    else if (genkakus == [9, 4])
+    else if (strGen == [9, 4])
         return text + 'ぬ';
-    else if (genkakus == [9, 2, 1])
+    else if (strGen == [9, 2, 1])
         return text + 'ね';
-    else if (genkakus == [3])
+    else if (strGen == [3])
         return text + 'の';
-    else if (genkakus == [10])
+    else if (strGen == [10])
         return text + 'は';
-    else if (genkakus == [1, 7])
+    else if (strGen == [1, 7])
         return text + 'ひ';
-    else if (genkakus == [9])
+    else if (strGen == [9])
         return text + 'ふ';
-    else if (genkakus == [4])
+    else if (strGen == [4])
         return text + 'へ';
-    else if (genkakus == [1, 2, 10])
+    else if (strGen == [1, 2, 10])
         return text + 'ほ';
-    else if (genkakus == [9, 5])
+    else if (strGen == [9, 5])
         return text + 'ま';
-    else if (genkakus == [6, 1])
+    else if (strGen == [6, 1])
         return text + 'み';
-    else if (genkakus == [7, 5])
+    else if (strGen == [7, 5])
         return text + 'む';
-    else if (genkakus == [3, 5])
+    else if (strGen == [3, 5])
         return text + 'め';
-    else if (genkakus == [6, 7])
+    else if (strGen == [6, 7])
         return text + 'も';
-    else if (genkakus == [8, 4])
+    else if (strGen == [8, 4])
         return text + 'や';
-    else if (genkakus == [9, 1])
+    else if (strGen == [9, 1])
         return text + 'ゆ';
-    else if (genkakus == [8, 6])
+    else if (strGen == [8, 6])
         return text + 'よ';
-    else if (genkakus == [5, 9])
+    else if (strGen == [5, 9])
         return text + 'ら';
-    else if (genkakus == [12])
+    else if (strGen == [12])
         return text + 'り';
-    else if (genkakus == [3, 7])
+    else if (strGen == [3, 7])
         return text + 'る';
-    else if (genkakus == [7])
+    else if (strGen == [7])
         return text + 'れ';
-    else if (genkakus == [7, 8])
+    else if (strGen == [7, 8])
         return text + 'ろ';
-    else if (genkakus == [1, 9])
+    else if (strGen == [1, 9])
         return text + 'を';
-    else if (genkakus == [5, 1])
+    else if (strGen == [5, 1])
         return text + 'ん';
     else
         return text;
