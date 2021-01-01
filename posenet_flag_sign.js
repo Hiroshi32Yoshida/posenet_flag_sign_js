@@ -103,7 +103,7 @@ function detectPoseInRealTime(video, net) {
         let deg;
 
         poses.forEach(({ s, keypoints }) => {
-	        drawBP(keypoints[0],keypoints[1],ctx);
+	        //drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
             angles = calculate_angles(keypoints);
