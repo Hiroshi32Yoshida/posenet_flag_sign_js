@@ -129,10 +129,14 @@ function detectPoseInRealTime(video, net) {
             //test
 
             // draw strings
-            ctx.font = fontLayout;
+            ctx.font = "bold 14px Arial";
+            //ctx.font = fontLayout;
             ctx.fillStyle = "red";
             //ctx.fillText(curText, 40, 40);
-            ctx.fillText(keypoints[LEFTELBOW].position.y.toString(), 40, 40);
+            ctx.fillText('left elbow: ' + keypoints[LEFTELBOW].position.y.toString(), 40, 40);
+            ctx.fillText('right elbow: ' + keypoints[RIGHTELBOW].position.y.toString(), 40, 80);
+            ctx.fillText('left wrist: ' + keypoints[LEFTWRIST].position.y.toString(), 40, 120);
+            ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toString(), 40, 160);
             ctx.fill();
         });
 
