@@ -85,7 +85,7 @@ function detectPoseInRealTime(video, net) {
         poses.forEach(({ s, keypoints }) => {
 	    drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
-            drawSkeleton(keypoints, 0.5, ctx);
+            //drawSkeleton(keypoints, 0.5, ctx);
         });
 
 	ctx.font = fontLayout;
@@ -110,4 +110,20 @@ function drawBP(nose, leye, ctx){
     let nw = bpface.width * navScale;
     let nh = bpface.height * navScale;
     ctx.drawImage(bpface,nose.position.x - nh / 2 , nose.position.y - nh / 1.5, nw, nh);
+}
+
+/**
+ * Draw pose keypoints onto a canvas
+ */
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  for (let i = 0; i < keypoints.length; i++) {
+    const keypoint = keypoints[i];
+
+    if (keypoint.score < minConfidence) {
+      continue;
+    }
+
+    const {y, x} = keypoint.position;
+    drawPoint(ctx, y * scale, x * scale, 3, color);
+  }
 }
