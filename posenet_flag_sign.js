@@ -5,7 +5,7 @@ const stats = new Stats();
 const contentWidth = 800;
 const contentHeight = 600;
 const colors = ["red","blue","green"];
-const fontLayout = "bold 40px serif";
+const fontLayout = "bold 40px sans-serif";
 const color = 'aqua';
 
 const NOSE = 0;
@@ -119,7 +119,7 @@ function detectPoseInRealTime(video, net) {
                 }
 
                 if(count > 4){
-                    ctx.font = "bold 200px serif";
+                    ctx.font = "bold 200px sans-serif";
                     ctx.fillStyle = "blue";
                     ctx.fillText(genkaku, 200, 200);
                     ctx.fill();
@@ -141,8 +141,8 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();
             ctx.fillText('right wrist: ' + keypoints[RIGHTWRIST].position.y.toFixed(1) + ', ' + keypoints[RIGHTWRIST].position.x.toFixed(1), 40, 160);
             ctx.fill();*/
-            ctx.font = "24px serif";
-            ctx.fillStyle = "black";
+            ctx.font = "24px sans-serif";
+            ctx.fillStyle = "red";
             ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, 300);
             ctx.fill();
             ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, 330);
