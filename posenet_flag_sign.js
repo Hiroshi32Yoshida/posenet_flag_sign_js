@@ -87,11 +87,11 @@ function detectPoseInRealTime(video, net) {
 	        drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, 0.5, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
-            deg = calculate_angles(keypoints);
+            angles = calculate_angles(keypoints);
 
             ctx.font = fontLayout;
             ctx.fillStyle = "red";
-            ctx.fillText(deg, 70, 70);
+            ctx.fillText(angles[0], 70, 70);
             ctx.fill();
         });
 
@@ -150,6 +150,8 @@ function calculate_angles(keypoints) {
 
    deg = inner_Calc(x0, x1, x2, y0, y1, y2);
    angles.push(deg);
+
+   return angles;
 }
 
 const partNames = [
