@@ -106,7 +106,7 @@ function detectPoseInRealTime(video, net) {
             if(result != -1){
                 if(genkaku == result){
                     count++;
-                    if(count == 3){
+                    if(count == 5){
                         seq_genkaku.push(genkaku);
                     }
                 }
@@ -120,10 +120,10 @@ function detectPoseInRealTime(video, net) {
                     seq_genkaku.splice(0);
                 }
 
-                if(count > 2){
-                    ctx.font = "bold 100px Arial";
+                if(count > 4){
+                    ctx.font = "bold 200px Arial";
                     ctx.fillStyle = "blue";
-                    ctx.fillText(genkaku, 100, 100);
+                    ctx.fillText(genkaku, 200, 200);
                     ctx.fill();
                 }
             }
@@ -272,35 +272,35 @@ function judge_genkaku(keypoints){
         return 0
     else if (160 < angles[0] && 160 < angles[1] && 160 < angles[2] && 160 < angles[3])
         return 1
-    else if (150 < angles[0] && 140 < angles[1] && 80 < angles[2] < 145 && 80 < angles[3] < 135 && positions[0] == DOWN && positions[1] == UP)
+    else if (150 < angles[0] && 140 < angles[1] && (80 < angles[2] && angles[2] < 145) && (80 < angles[3] && angles[3] < 135) && positions[0] == DOWN && positions[1] == UP)
         return 2
-    else if (140 < angles[0] && 150 < angles[1] && 80 < angles[2] < 135 && 80 < angles[3] < 145 && positions[0] == UP && positions[1] == DOWN)
+    else if (140 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 145) && positions[0] == UP && positions[1] == DOWN)
         return -2
-    else if (150 < angles[0] && 150 < angles[1] && 145 < angles[2] < 165 && 135 < angles[3] < 165 && positions[0] == UP && positions[1] == DOWN)
+    else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (135 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == DOWN)
         return 3
-    else if (150 < angles[0] && 150 < angles[1] && 135 < angles[2] < 165 && 145 < angles[3] < 165 && positions[0] == DOWN && positions[1] == UP)
+    else if (150 < angles[0] && 150 < angles[1] && (135 < angles[2] && angles[2] < 165) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
         return 4
     else if (angles[0] < 120 && angles[1] < 120 && positions[0] == UP && positions[1] == UP)
         return 5
-    else if (150 < angles[1] && 80 < angles[2] < 145 && 165 < angles[3] && positions[0] == UP)
+    else if (150 < angles[1] && (80 < angles[2] && angles[2] < 145) && 165 < angles[3] && positions[0] == UP)
         return 6
-    else if (150 < angles[0] && 150 < angles[1] && 165 < angles[2] && 80 < angles[3] < 130 && positions[1] == UP)
+    else if (150 < angles[0] && 150 < angles[1] && 165 < angles[2] && (80 < angles[3] && angles[3] < 130) && positions[1] == UP)
         return 7
-    else if (150 < angles[0] && 150 < angles[1] && 80 < angles[2] < 135 && 165 < angles[3] && positions[0] == DOWN)
+    else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && 165 < angles[3] && positions[0] == DOWN)
         return 8
     else if (120 < angles[0] && 150 < angles[1] && angles[2] < 80 && 165 < angles[3] && positions[0] == DOWN)
         return 9
-    else if (150 < angles[0] && 150 < angles[1] && 130 < angles[2] < 165 && 130 < angles[3] < 165 && positions[0] == UP && positions[1] == UP)
+    else if (150 < angles[0] && 150 < angles[1] && (130 < angles[2] && angles[2] < 165) && (130 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == UP)
         return 10
-    else if (150 < angles[0] && angles[1] < 150 && 130 < angles[2] < 160 && 80 < angles[3] < 120 && positions[0] == UP && positions[1] == UP)
+    else if (150 < angles[0] && angles[1] < 150 && (130 < angles[2] && angles[2] < 160) && (80 < angles[3] && angles[3] < 120) && positions[0] == UP && positions[1] == UP)
         return -11
-    else if (angles[0] < 150 && 150 < angles[1] && 60 < angles[2] < 120 && 130 < angles[3] < 160 && positions[0] == DOWN && positions[1] == DOWN)
+    else if (angles[0] < 150 && 150 < angles[1] && (60 < angles[2] && angles[2] < 120) && (130 < angles[3] && angles[3] < 160) && positions[0] == DOWN && positions[1] == DOWN)
         return 11
-    else if (150 < angles[0] && 150 < angles[1] && 80 < angles[2] < 135 && 80 < angles[3] < 135 && positions[0] == UP && positions[1] == UP)
+    else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 135) && positions[0] == UP && positions[1] == UP)
         return 12
-    else if (150 < angles[0] && 150 < angles[1] && 145 < angles[2] < 165 && 80 < angles[3] < 120 && positions[0] == UP && positions[1] == DOWN)
+    else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (80 < angles[3] && angles[3] < 120) && positions[0] == UP && positions[1] == DOWN)
         return 13
-    else if (150 < angles[0] && 150 < angles[1] && 80 < angles[2] < 120 && 145 < angles[3] < 165 && positions[0] == DOWN && positions[1] == UP)
+    else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 120) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
         return 14
     else
         return -1
