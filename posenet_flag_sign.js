@@ -143,13 +143,13 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();*/
             ctx.font = "24px sans-serif";
             ctx.fillStyle = "blue";
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1), 40, contentHeight - 80);
+            ctx.fillText('left elbow angle: ' + angles[0].toFixed(1), 40, contentHeight - 80);
             ctx.fill();
-            ctx.fillText('right elbow: ' + angles[1].toFixed(1), 40, contentHeight - 60);
+            ctx.fillText('right elbow angle: ' + angles[1].toFixed(1), 40, contentHeight - 60);
             ctx.fill();
-            ctx.fillText('left wrist: ' + angles[2].toFixed(1), 40, contentHeight - 40);
+            ctx.fillText('left shoulder angle: ' + angles[2].toFixed(1), 40, contentHeight - 40);
             ctx.fill();
-            ctx.fillText('right wrist: ' + angles[3].toFixed(1), 40, contentHeight - 20);
+            ctx.fillText('right shoulder angle: ' + angles[3].toFixed(1), 40, contentHeight - 20);
             ctx.fill();
         });
 
