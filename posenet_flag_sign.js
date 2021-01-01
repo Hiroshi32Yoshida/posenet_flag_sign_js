@@ -353,7 +353,7 @@ function judge_kana(text, genkakus) {
             default: return text;
         }
     }
-
+/*
     switch(strGen){
         case [9, 3]: return text + 'あ';
         case [3, 2]: return text + 'い';
@@ -403,7 +403,8 @@ function judge_kana(text, genkakus) {
         case [5, 1]: return text + 'ん';
         default: return text;
     }
-/*
+    */
+
     if (strGen == [9, 3])
         return text + 'あ';
     else if (strGen == [3, 2])
@@ -496,5 +497,5 @@ function judge_kana(text, genkakus) {
         return text + 'ん';
     else
         return text;
-        */
+        
 }
