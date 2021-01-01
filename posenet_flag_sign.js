@@ -243,15 +243,19 @@ const DOWN = 1;
 
 function get_positions(keypoints) {
     positions = [];
-    if(keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y)
+    if((keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
+    (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
         positions.push(UP);  // up
-    else
+    }else{
         positions.push(DOWN);  // down
+    }
 
-    if(keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y)
+    if((keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y) ||
+    (keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y)){
         positions.push(UP);  // up
-    else
+    }else{
         positions.push(DOWN);  // down
+    }
 
     return positions
 }
@@ -261,41 +265,41 @@ function judge_genkaku(keypoints){
     positions = get_positions(keypoints);
     // left elbow - right elbow - left shoulder - right shoulder
     if ((150 < angles[0]) && (150 < angles[1]) && (80 < angles[2] < 130) && (80 < angles[3] < 130) && (positions[0] == DOWN) && (positions[1] == DOWN))
-        return 0
-    else if (160 < angles[0] && 160 < angles[1] && 150 < angles[2] && 150 < angles[3])
-        return 1
+        return 0;
+    else if (160 < angles[0] && 160 < angles[1] && 160 < angles[2] && 160 < angles[3])
+        return 1;
     else if (150 < angles[0] && 140 < angles[1] && (80 < angles[2] && angles[2] < 145) && (80 < angles[3] && angles[3] < 135) && positions[0] == DOWN && positions[1] == UP)
-        return 2
+        return 2;
     else if (140 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 145) && positions[0] == UP && positions[1] == DOWN)
-        return -2
+        return -2;
     else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (135 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == DOWN)
-        return 3
+        return 3;
     else if (150 < angles[0] && 150 < angles[1] && (135 < angles[2] && angles[2] < 165) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
-        return 4
+        return 4;
     else if (angles[0] < 120 && angles[1] < 120 && positions[0] == UP && positions[1] == UP)
-        return 5
+        return 5;
     else if (150 < angles[1] && (80 < angles[2] && angles[2] < 145) && 165 < angles[3] && positions[0] == UP)
-        return 6
+        return 6;
     else if (150 < angles[0] && 150 < angles[1] && 165 < angles[2] && (80 < angles[3] && angles[3] < 130) && positions[1] == UP)
-        return 7
+        return 7;
     else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && 165 < angles[3] && positions[0] == DOWN)
-        return 8
+        return 8;
     else if (120 < angles[0] && 150 < angles[1] && angles[2] < 80 && 165 < angles[3] && positions[0] == DOWN)
-        return 9
+        return 9;
     else if (150 < angles[0] && 150 < angles[1] && (130 < angles[2] && angles[2] < 165) && (130 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == UP)
-        return 10
+        return 10;
     else if (150 < angles[0] && angles[1] < 150 && (130 < angles[2] && angles[2] < 160) && (80 < angles[3] && angles[3] < 120) && positions[0] == UP && positions[1] == UP)
-        return -11
+        return -11;
     else if (angles[0] < 150 && 150 < angles[1] && (60 < angles[2] && angles[2] < 120) && (130 < angles[3] && angles[3] < 160) && positions[0] == DOWN && positions[1] == DOWN)
-        return 11
+        return 11;
     else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 135) && positions[0] == UP && positions[1] == UP)
-        return 12
+        return 12;
     else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (80 < angles[3] && angles[3] < 120) && positions[0] == UP && positions[1] == DOWN)
-        return 13
+        return 13;
     else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 120) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
-        return 14
+        return 14;
     else
-        return -1
+        return -1;
 }
 
 function judge_kana(text, genkakus) {
