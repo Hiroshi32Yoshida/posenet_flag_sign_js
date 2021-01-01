@@ -246,7 +246,7 @@ function getAngles(keypoints) {
 //function calculateInternalAngle(x0, x1, x2, y0, y1, y2) {
 function calculateInternalAngle(keypoints, point0, point1, point2, minConfidence) {
 
-    if(keypoints[point0].score < minConfidence || keypoints[point1] < minConfidence || keypoints[point2] < minConfidence){
+    if(keypoints[point0].score < minConfidence || keypoints[point1].score < minConfidence || keypoints[point2].score < minConfidence){
         return -1;
     }
     var a = {x:keypoints[point1].position.x-keypoints[point0].position.x, y:keypoints[point1].position.y-keypoints[point0].position.y};
