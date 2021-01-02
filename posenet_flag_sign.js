@@ -39,6 +39,18 @@ let navScale = 1
 bpface.src = "bp_face.png"
 bindPage();
 
+function isAndroid() {
+    return /Android/i.test(navigator.userAgent);
+}
+  
+function isiOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+  
+function isMobile() {
+    return isAndroid() || isiOS();
+}
+
 async function bindPage() {
     const net = await posenet.load();
     let video;
@@ -57,12 +69,19 @@ async function loadVideo() {
     return video;
 }
 
+const mobile = isMobile();
+ 
 async function setupCamera() {
     const video = document.getElementById('video');
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
             'audio': false,
-            'video': true});
+            'video': {
+                facingMode: 'user',
+                width: mobile ? undefined : contentWidth,
+                height: mobile ? undefined : contentHeight,
+              }
+            });
         video.srcObject = stream;
 
         return new Promise(resolve => {
