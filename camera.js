@@ -14,9 +14,6 @@
  * limitations under the License.
  * =============================================================================
  */
-import dat from 'dat.gui';
-import Stats from 'stats.js';
-
 import {drawBoundingBox, drawKeypoints, drawSkeleton, isMobile, toggleLoadingUI, tryResNetButtonName, tryResNetButtonText, updateTryResNetButtonDatGuiCss} from './demo_util';
 
 const videoWidth = 600;
