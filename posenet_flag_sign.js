@@ -267,7 +267,7 @@ function judge_genkaku(keypoints){
         return 3;
     else if (150 < angles[0] && 150 < angles[1] && (135 < angles[2] && angles[2] < 165) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
         return 4;
-    else if (angles[0] < 120 && angles[1] < 120 && positions[0] == UP && positions[1] == UP)
+    else if ((angles[0] < 120 && angles[0] != -1) && (angles[1] < 120 && angles[1] != -1) && positions[0] == UP && positions[1] == UP)
         return 5;
     else if (150 < angles[1] && (80 < angles[2] && angles[2] < 145) && 165 < angles[3] && positions[0] == UP)
         return 6;
