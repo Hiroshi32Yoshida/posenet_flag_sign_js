@@ -275,7 +275,7 @@ function judge_genkaku(keypoints){
         return 7;
     else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && 165 < angles[3] && positions[0] == DOWN)
         return 8;
-    else if (120 < angles[0] && 150 < angles[1] && angles[2] < 80 && 165 < angles[3] && positions[0] == DOWN)
+    else if (100 < angles[0] && 150 < angles[1] && angles[2] < 90 && 160 < angles[3] && positions[0] == DOWN)
         return 9;
     else if (150 < angles[0] && 150 < angles[1] && (130 < angles[2] && angles[2] < 165) && (130 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == UP)
         return 10;
@@ -283,7 +283,7 @@ function judge_genkaku(keypoints){
         return -11;
     else if (angles[0] < 150 && 150 < angles[1] && (60 < angles[2] && angles[2] < 120) && (130 < angles[3] && angles[3] < 160) && positions[0] == DOWN && positions[1] == DOWN)
         return 11;
-    else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 135) && positions[0] == UP && positions[1] == UP)
+    else if (140 < angles[0] && 140 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 135) && positions[0] == UP && positions[1] == UP)
         return 12;
     else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (80 < angles[3] && angles[3] < 120) && positions[0] == UP && positions[1] == DOWN)
         return 13;
