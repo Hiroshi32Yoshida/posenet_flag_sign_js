@@ -1,5 +1,5 @@
-const imageScaleFactor = 0.4;
-const outputStride = 16;
+const imageScaleFactor = 0.8;
+const outputStride = 24;
 const flipHorizontal = false;
 const stats = new Stats();
 const contentWidth = 800;
@@ -7,7 +7,7 @@ const contentHeight = 600;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 40px sans-serif";
 const color = 'aqua';
-const minConfidence = 0.5;
+const minConfidence = 0.3;
 
 const NOSE = 0;
 const LEFTEYE = 1;
