@@ -183,12 +183,12 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();
             ctx.fillText('stretching arms: left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, contentHeight - 80);
             ctx.fill();
-            //ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 80);
+            ctx.fillText('Angles:', 10, contentHeight - 65)
+            ctx.fill();
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 65);
+            ctx.fill();
+            //ctx.fillText('left elbow: ' + getDistFromNose(keypoints, LEFTELBOW).toFixed(1) + ', right elbow: ' + getDistFromNose(keypoints, RIGHTELBOW).toFixed(1) + ', left wrist: ' + getDistFromNose(keypoints, LEFTWRIST).toFixed(1) + ', right wrist: ' + getDistFromNose(keypoints, RIGHTWRIST).toFixed(1), 15, contentHeight - 50);
             //ctx.fill();
-            ctx.fillText('Distance from nose:', 10, contentHeight - 65)
-            ctx.fill();
-            ctx.fillText('left elbow: ' + getDistFromNose(keypoints, LEFTELBOW).toFixed(1) + ', right elbow: ' + getDistFromNose(keypoints, RIGHTELBOW).toFixed(1) + ', left wrist: ' + getDistFromNose(keypoints, LEFTWRIST).toFixed(1) + ', right wrist: ' + getDistFromNose(keypoints, RIGHTWRIST).toFixed(1), 15, contentHeight - 50);
-            ctx.fill();
             ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, contentHeight - 35);
             ctx.fill();
             ctx.fillText('score = left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
@@ -423,30 +423,33 @@ function judge_genkaku(keypoints){
         positions[RIGHTHAND_UPDOWN] == DOWN &&
         positions[LEFTHAND_UPDOWN] == UP))
         return -2;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (145 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
         (135 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
         positions[LEFTHAND_UPDOWN] == UP &&
-        positions[RIGHTHAND_UPDOWN] == DOWN)
+        positions[RIGHTHAND_UPDOWN] == DOWN) ||
+        ((145 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 165) &&
+        (135 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 165) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == DOWN))
         return 3;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (135 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
         (145 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
-        positions[RIGHTHAND_UPDOWN] == UP)
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        ((135 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 165) &&
+        (145 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 165) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == UP))
         return 4;
-    else if ((angles[ANG_LELBOW] < 120 && angles[ANG_LELBOW] != -1) &&
-        (angles[ANG_RELBOW] < 120 && angles[ANG_RELBOW] != -1) &&
-        positions[LEFTHAND_UPDOWN] == UP &&
-        positions[RIGHTHAND_UPDOWN] == UP)
-        return 5;
     else if ((150 < angles[ANG_RELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 145) &&
         165 < angles[ANG_RSHOULDER] &&
         positions[LEFTHAND_UPDOWN] == UP) ||
-        (165 < angles[ANG_RSHOULDERW] &&
+        (160 < angles[ANG_RSHOULDERW] &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[LEFTHAND_LR] == RIGHT))
         return 6;
@@ -479,28 +482,42 @@ function judge_genkaku(keypoints){
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[LEFTHAND_LR] == RIGHT))
         return 9;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (130 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
         (130 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
         positions[LEFTHAND_UPDOWN] == UP &&
-        positions[RIGHTHAND_UPDOWN] == UP)
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        ((130 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 165) &&
+        (130 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 165) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == UP))
         return 10;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         angles[ANG_RELBOW] < 150 &&
         (130 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 160) &&
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 120) &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == UP &&
-        positions[RIGHTHAND_LR] == LEFT)
+        positions[RIGHTHAND_LR] == LEFT) ||
+        ((130 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 160) &&
+        (80 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 120) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_LR] == LEFT))
         return -11;
-    else if (angles[ANG_LELBOW] < 150 &&
+    else if ((angles[ANG_LELBOW] < 150 &&
         150 < angles[ANG_RELBOW] &&
         (60 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 120) &&
         (130 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 160) &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[RIGHTHAND_UPDOWN] == DOWN &&
-        positions[LEFTHAND_LR] == RIGHT)
+        positions[LEFTHAND_LR] == RIGHT) ||
+        ((60 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 120) &&
+        (130 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 160) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == DOWN &&
+        positions[LEFTHAND_LR] == RIGHT))
         return 11;
     else if ((140 < angles[ANG_LELBOW] &&
         140 < angles[ANG_RELBOW] &&
@@ -513,20 +530,35 @@ function judge_genkaku(keypoints){
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 12;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (145 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 120) &&
         positions[LEFTHAND_UPDOWN] == UP &&
-        positions[RIGHTHAND_UPDOWN] == DOWN)
+        positions[RIGHTHAND_UPDOWN] == DOWN) ||
+        (150 < angles[ANG_RELBOW] &&
+        (145 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 165) &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 120) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == DOWN))
         return 13;
-    else if (150 < angles[ANG_LELBOW] &&
+    else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 120) &&
         (145 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
-        positions[RIGHTHAND_UPDOWN] == UP)
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        (150 < angles[ANG_LELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 120) &&
+        (145 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 165) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == UP))
         return 14;
+    else if ((angles[ANG_LELBOW] < 120 && angles[ANG_LELBOW] != -1) &&
+        (angles[ANG_RELBOW] < 120 && angles[ANG_RELBOW] != -1) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == UP)
+        return 5;
     else
         return -1;
 }
