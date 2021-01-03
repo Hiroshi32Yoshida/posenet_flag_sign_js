@@ -157,15 +157,15 @@ function detectPoseInRealTime(video, net) {
             ctx.fillStyle = "red";
             ctx.fillText(curText, 20, 40);
 
-            ctx.font = "24px sans-serif";
+            ctx.font = "20px sans-serif";
             ctx.fillStyle = "blue";
-            ctx.fillText('left elbow angle: ' + angles[0].toFixed(1) + ' score: ' + keypoints[LEFTELBOW].score.toFixed(3), 20, contentHeight - 80);
+            ctx.fillText('angles: ' + angles[0].toFixed(1) + ', ' + angles[1].toFixed(1) + ', ' + angles[2].toFixed(1) + ', ' + angles[3].toFixed(1), 10, contentHeight - 60);
             ctx.fill();
-            ctx.fillText('right elbow angle: ' + angles[1].toFixed(1) + ' score: ' + keypoints[RIGHTELBOW].score.toFixed(3), 20, contentHeight - 60);
+            ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWROST].score.toFixed(3), 10, contentHeight - 40);
             ctx.fill();
-            ctx.fillText('left shoulder angle: ' + angles[2].toFixed(1) + ' score: ' + keypoints[LEFTSHOULDER].score.toFixed(3), 20, contentHeight - 40);
+            ctx.fillText('score = left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
             ctx.fill();
-            ctx.fillText('right shoulder angle: ' + angles[3].toFixed(1) + ' score: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 20, contentHeight - 20);
+            ctx.fillText('score = left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, contentHeight);
             ctx.fill();
         });
 
