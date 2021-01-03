@@ -260,23 +260,20 @@ function getStretchingArm(keypoints, point){
 function getAngles(keypoints) {
    var angles = [];
 
-   //
-   // 両眼との角度
-   // 
    // 左肘
-   deg = calculateInternalAngle(keypoints, LEFTEYE, LEFTELBOW, RIGHTEYE, minConfidence);
+   deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER, minConfidence);
    angles.push(deg);
 
    // 右肘
-   deg = calculateInternalAngle(keypoints, RIGHTEYE, RIGHTELBOW, LEFTEYE, minConfidence);
+   deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, minConfidence);
    angles.push(deg);
   
-   // 左手
-   deg = calculateInternalAngle(keypoints, LEFTEYE, LEFTWRIST, RIGHTEYE, minConfidence);
+   // 左肩
+   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTWRIST, RIGHTSHOULDER, minConfidence);
    angles.push(deg);
   
-   // 右手
-   deg = calculateInternalAngle(keypoints, RIGHTEYE, RIGHTWRIST, LEFTEYE, minConfidence);
+   // 右肩
+   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTWRIST, LEFTSHOULDER, minConfidence);
    angles.push(deg);
 
    // 両手と鼻
