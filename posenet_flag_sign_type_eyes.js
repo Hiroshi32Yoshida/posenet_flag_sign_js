@@ -163,7 +163,7 @@ function detectPoseInRealTime(video, net) {
 
                 if(count > 4){
                     ctx.font = "bold 200px sans-serif";
-                    ctx.fillStyle = "blue";
+                    ctx.fillStyle = "white";
                     ctx.fillText(genkaku, 200, 250);
                     ctx.fill();
                 }
@@ -178,7 +178,7 @@ function detectPoseInRealTime(video, net) {
             ctx.fillText(curText, 20, 40);
 
             ctx.font = "18px sans-serif";
-            ctx.fillStyle = "brown";
+            ctx.fillStyle = "blue";
             ctx.fillText('[arm and nose angles]left: ' + angles[6].toFixed(1) + ', right: ' + angles[7].toFixed(1), 10, contentHeight - 95);
             ctx.fill();
             ctx.fillText('[stretching arms]left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, contentHeight - 80);
