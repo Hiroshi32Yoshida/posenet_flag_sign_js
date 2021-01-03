@@ -7,6 +7,7 @@ const contentHeight = 600;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 40px sans-serif";
 const color = 'aqua';
+const minConfidence = 0.3;
 
 const NOSE = 0;
 const LEFTEYE = 1;
@@ -119,7 +120,7 @@ function detectPoseInRealTime(video, net) {
 
         poses.forEach(({ s, keypoints }) => {
 	        drawBP(keypoints[0],keypoints[1],ctx);
-            drawKeypoints(keypoints, 0.5, ctx);
+            drawKeypoints(keypoints, minConfidence, ctx);
             //drawSkeleton(keypoints, 0.5, ctx);
 
             result = judge_genkaku(keypoints);
@@ -185,7 +186,7 @@ function drawBP(nose, leye, ctx){
 
 function drawPoint(ctx, y, x, r, color) {
   ctx.beginPath();
-  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.arc(x, y, r, 0, 3 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
 }
@@ -193,11 +194,11 @@ function drawPoint(ctx, y, x, r, color) {
 /**
  * Draw pose keypoints onto a canvas
  */
-function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+function drawKeypoints(keypoints, confidence, ctx, scale = 1) {
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
 
-    if (keypoint.score < minConfidence) {
+    if (keypoint.score < confidence) {
       continue;
     }
 
@@ -210,28 +211,28 @@ function getAngles(keypoints) {
    var angles = [];
 
    // 左肘
-   deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER, 0.5);
+   deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER, minConfidence);
    angles.push(deg);
 
    // 右肘
-   deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, 0.5);
+   deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, minConfidence);
    angles.push(deg);
   
    // 左肩
-   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, RIGHTSHOULDER, LEFTELBOW, 0.5);
+   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, RIGHTSHOULDER, LEFTELBOW, minConfidence);
    angles.push(deg);
   
    // 右肩
-   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, LEFTSHOULDER, RIGHTELBOW, 0.5);
+   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, LEFTSHOULDER, RIGHTELBOW, minConfidence);
    angles.push(deg);
 
    return angles;
 }
 
 // 内角を求める
-function calculateInternalAngle(keypoints, point0, point1, point2, minConfidence) {
+function calculateInternalAngle(keypoints, point0, point1, point2, confidence) {
 
-    if(keypoints[point0].score < minConfidence || keypoints[point1].score < minConfidence || keypoints[point2].score < minConfidence){
+    if(keypoints[point0].score < confidence || keypoints[point1].score < confidence || keypoints[point2].score < confidence){
         return -1;
     }
     var a = {x:keypoints[point1].position.x-keypoints[point0].position.x, y:keypoints[point1].position.y-keypoints[point0].position.y};
@@ -253,8 +254,8 @@ function calculateInternalAngle(keypoints, point0, point1, point2, minConfidence
 
 function get_positions(keypoints) {
     positions = [];
-    if((keypoints[LEFTELBOW].score > 0.5) && (keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
-    (keypoints[LEFTWRIST].score > 0.5) && (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
+    if((keypoints[LEFTELBOW].score > minConfidence) && (keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
+    (keypoints[LEFTWRIST].score > minConfidence) && (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
         positions.push(UP);  // up
     }else{
         positions.push(DOWN);  // down
