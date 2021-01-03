@@ -187,8 +187,6 @@ function detectPoseInRealTime(video, net) {
             ctx.fill();
             ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 50);
             ctx.fill();
-            //ctx.fillText('left elbow: ' + getDistFromNose(keypoints, LEFTELBOW).toFixed(1) + ', right elbow: ' + getDistFromNose(keypoints, RIGHTELBOW).toFixed(1) + ', left wrist: ' + getDistFromNose(keypoints, LEFTWRIST).toFixed(1) + ', right wrist: ' + getDistFromNose(keypoints, RIGHTWRIST).toFixed(1), 15, contentHeight - 50);
-            //ctx.fill();
             ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, contentHeight - 35);
             ctx.fill();
             ctx.fillText('score = left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
@@ -459,9 +457,6 @@ function judge_genkaku(keypoints){
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 130) &&
         positions[RIGHTHAND_UPDOWN] == UP) ||
         (160 < angles[ANG_LSHOULDERW] &&
-        angles[ANG_RSHOULDERWN] < 70 &&
-        positions[RIGHTHAND_UPDOWN] == UP) ||
-        (160 < angles[ANG_LSHOULDER] &&
         angles[ANG_RSHOULDERWN] < 70 &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 7;
