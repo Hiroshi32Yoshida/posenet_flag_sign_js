@@ -159,7 +159,9 @@ function detectPoseInRealTime(video, net) {
 
             ctx.font = "18px sans-serif";
             ctx.fillStyle = "lightgray";
-            ctx.fillText('angle of arms and nose:' + angles[4].toFixed(1), 10, contentHeight - 80);
+            ctx.fillText('angle of arms and nose:' + angles[4].toFixed(1), 10, contentHeight - 95);
+            ctx.fill();
+            ctx.fillText('stretching arms: left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, contentHeight - 80);
             ctx.fill();
             //ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 80);
             //ctx.fill();
