@@ -178,20 +178,20 @@ function detectPoseInRealTime(video, net) {
             ctx.fillText(curText, 20, 40);
 
             ctx.font = "18px sans-serif";
-            ctx.fillStyle = "lightgray";
-            ctx.fillText('angle of arms and nose: left: ' + angles[6].toFixed(1) + ', right: ' + angles[7].toFixed(1), 10, contentHeight - 95);
+            ctx.fillStyle = "brawn";
+            ctx.fillText('[arm and nose angles]left: ' + angles[6].toFixed(1) + ', right: ' + angles[7].toFixed(1), 10, contentHeight - 95);
             ctx.fill();
-            ctx.fillText('stretching arms: left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, contentHeight - 80);
+            ctx.fillText('[stretching arms]left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, contentHeight - 80);
             ctx.fill();
-            ctx.fillText('Angles:', 10, contentHeight - 65)
+            ctx.fillText('[Angles]', 10, contentHeight - 65)
             ctx.fill();
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 50);
+            ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left shoulder: ' + angles[2].toFixed(1) + ', right shoulder: ' + angles[3].toFixed(1), 20, contentHeight - 50);
             ctx.fill();
-            ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, contentHeight - 35);
+            ctx.fillText('[score]left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, contentHeight - 35);
             ctx.fill();
-            ctx.fillText('score = left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
+            ctx.fillText('[score]left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
             ctx.fill();
-            ctx.fillText('score = left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, contentHeight - 5);
+            ctx.fillText('[score]left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, contentHeight - 5);
             ctx.fill();
         });
 
