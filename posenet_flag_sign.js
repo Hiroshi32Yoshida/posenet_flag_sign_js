@@ -161,7 +161,7 @@ function detectPoseInRealTime(video, net) {
             ctx.fillStyle = "blue";
             ctx.fillText('angles: ' + angles[0].toFixed(1) + ', ' + angles[1].toFixed(1) + ', ' + angles[2].toFixed(1) + ', ' + angles[3].toFixed(1), 10, contentHeight - 60);
             ctx.fill();
-            ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWROST].score.toFixed(3), 10, contentHeight - 40);
+            ctx.fillText('score = left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, contentHeight - 40);
             ctx.fill();
             ctx.fillText('score = left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, contentHeight - 20);
             ctx.fill();
