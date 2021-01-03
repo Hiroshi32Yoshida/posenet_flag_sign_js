@@ -1,5 +1,5 @@
-const imageScaleFactor = 0.4;
-const outputStride = 16;
+const imageScaleFactor = 0.5;
+const outputStride = 24;
 const flipHorizontal = false;
 const stats = new Stats();
 const contentWidth = 800;
@@ -407,7 +407,7 @@ function judge_genkaku(keypoints){
         positions[RIGHTHAND_UPDOWN] == UP) ||
         (150 < angles[ANG_LELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 145) &&
-        angles[ANG_RSHOULDERWN] < 50 &&
+        angles[ANG_RSHOULDERWN] < 70 &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 2;
@@ -419,7 +419,7 @@ function judge_genkaku(keypoints){
         positions[RIGHTHAND_UPDOWN] == DOWN) ||
         (150 < angles[ANG_RELBOW] &&
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 145) &&
-        angles[ANG_LSHOULDERWN] < 50 &&
+        angles[ANG_LSHOULDERWN] < 70 &&
         positions[RIGHTHAND_UPDOWN] == DOWN &&
         positions[LEFTHAND_UPDOWN] == UP))
         return -2;
@@ -459,7 +459,10 @@ function judge_genkaku(keypoints){
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 130) &&
         positions[RIGHTHAND_UPDOWN] == UP) ||
         (160 < angles[ANG_LSHOULDERW] &&
-        angles[ANG_RSHOULDERWN] < 50 &&
+        angles[ANG_RSHOULDERWN] < 70 &&
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        (160 < angles[ANG_LSHOULDER] &&
+        angles[ANG_RSHOULDERWN] < 70 &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 7;
     else if ((150 < angles[ANG_LELBOW] &&
