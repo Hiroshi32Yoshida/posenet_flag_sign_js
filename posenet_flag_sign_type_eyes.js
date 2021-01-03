@@ -344,7 +344,7 @@ function get_positions(keypoints) {
             positions.push(DOWN);
         }
     }else{
-        position.push(0);
+        positions.push(0);
     }
 
     if((keypoints[RIGHTELBOW].score > minConfidence) || (keypoints[RIGHTWRIST].score > minConfidence)){
@@ -355,7 +355,7 @@ function get_positions(keypoints) {
             positions.push(DOWN);
         }
     }else{
-        position.push(0);
+        positions.push(0);
     }
 
     if(keypoints[LEFTWRIST].score > minConfidence){
@@ -365,7 +365,7 @@ function get_positions(keypoints) {
             positions.push(RIGHT);
         }
     }else{
-        position.push(0);
+        positions.push(0);
     }
 
     if(keypoints[RIGHTWRIST].score > minConfidence){
@@ -375,7 +375,7 @@ function get_positions(keypoints) {
             positions.push(RIGHT);
         }
     }else{
-        position.push(0);
+        positions.push(0);
     }
 
     return positions
