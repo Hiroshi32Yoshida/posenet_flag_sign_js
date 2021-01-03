@@ -554,8 +554,8 @@ function judge_genkaku(keypoints){
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 135) &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == UP) ||
-        (angles[ANG_LSHOULDERWN] < 50 &&
-        angles[ANG_RSHOULDERWN] < 50 &&
+        (angles[ANG_LSHOULDERWN] < 70 &&
+        angles[ANG_RSHOULDERWN] < 70 &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 12;
