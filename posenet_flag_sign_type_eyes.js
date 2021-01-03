@@ -1,5 +1,5 @@
-const imageScaleFactor = 0.5;
-const outputStride = 24;
+const imageScaleFactor = 0.4;
+const outputStride = 16;
 const flipHorizontal = false;
 const stats = new Stats();
 const contentWidth = 800;
@@ -468,11 +468,11 @@ function judge_genkaku(keypoints){
     else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 135) &&
-        165 < angles[ANG_RSHOULDER] &&
+        170 < angles[ANG_RSHOULDER] &&
         positions[LEFTHAND_UPDOWN] == DOWN) ||
         (150 < angles[ANG_LELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 135) &&
-        165 < angles[ANG_RSHOULDERW] &&
+        170 < angles[ANG_RSHOULDERW] &&
         positions[LEFTHAND_UPDOWN] == DOWN))
         return 8;
     else if ((100 < angles[ANG_LELBOW] &&
@@ -524,12 +524,12 @@ function judge_genkaku(keypoints){
         return 11;
     else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
-        (145 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
+        (145 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 170) &&
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 120) &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == DOWN) ||
         (150 < angles[ANG_RELBOW] &&
-        (145 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 165) &&
+        (145 < angles[ANG_LSHOULDERW] && angles[ANG_LSHOULDERW] < 170) &&
         (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 120) &&
         positions[LEFTHAND_UPDOWN] == UP &&
         positions[RIGHTHAND_UPDOWN] == DOWN))
@@ -537,12 +537,12 @@ function judge_genkaku(keypoints){
     else if ((150 < angles[ANG_LELBOW] &&
         150 < angles[ANG_RELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 120) &&
-        (145 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
+        (145 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 170) &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[RIGHTHAND_UPDOWN] == UP) ||
         (150 < angles[ANG_LELBOW] &&
         (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 120) &&
-        (145 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 165) &&
+        (145 < angles[ANG_RSHOULDERW] && angles[ANG_RSHOULDERW] < 170) &&
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[RIGHTHAND_UPDOWN] == UP))
         return 14;
