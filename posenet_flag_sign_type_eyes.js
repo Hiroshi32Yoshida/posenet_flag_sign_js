@@ -29,10 +29,26 @@ const RIGHTANKLE = 16;
 
 const UP = 1;
 const DOWN = 2;
+const LEFT = 3;
+const RIGHT = 4;
 
 const EXTENDED = 0;
 const FOLDED = 1;
 const UNKNOWN = -1;
+
+const ANG_LELBOW = 0;
+const ANG_RELBOW = 1;
+const ANG_LSHOULDER = 2;
+const ANG_RSHOULDER = 3
+const ANG_LSHOULDERW = 4;
+const ANG_RSHOULDERW = 5;
+const ANG_LSHOULDERWN = 6;
+const ANG_RSHOULDERWN = 7;
+
+const LEFTHAND_UPDOWN = 0;
+const RIGHTHAND_UPDOWN = 1;
+const LEFTHAND_LR = 2;
+const RIGHTHAND_LR = 3;
 
 let genkaku = -1;
 let count = 0;
@@ -268,16 +284,28 @@ function getAngles(keypoints) {
    deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, minConfidence);
    angles.push(deg);
   
-   // 左肩
+   // 左肩（肘との内角）
+   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTELBOW, RIGHTSHOULDER, minConfidence);
+   angles.push(deg);
+  
+   // 右肩（肘との内角）
+   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTELBOW, LEFTSHOULDER, minConfidence);
+   angles.push(deg);
+
+   // 左肩（手との内角）
    deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTWRIST, RIGHTSHOULDER, minConfidence);
    angles.push(deg);
   
-   // 右肩
+   // 右肩（手との内角）
    deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTWRIST, LEFTSHOULDER, minConfidence);
    angles.push(deg);
 
-   // 両手と鼻
-   deg = calculateInternalAngle(keypoints, NOSE, RIGHTWRIST, LEFTWRIST, minConfidence);
+   // 左肩（手と鼻の内角）
+   deg = calculateInternalAngle(keypoints, LEFTSHOULDER, NOSE, LEFTWRIST, minConfidence);
+   angles.push(deg);
+
+   // 右肩（手と鼻の内角）
+   deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, NOSE, RIGHTWRIST, minConfidence);
    angles.push(deg);
 
    return angles;
@@ -308,18 +336,46 @@ function calculateInternalAngle(keypoints, point0, point1, point2, confidence) {
 
 function get_positions(keypoints) {
     positions = [];
-    if((keypoints[LEFTELBOW].score > minConfidence) && (keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
-    (keypoints[LEFTWRIST].score > minConfidence) && (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
-        positions.push(UP);  // up
+    if((keypoints[LEFTELBOW].score > minConfidence) || (keypoints[LEFTWRIST].score > minConfidence)){
+        if((keypoints[LEFTELBOW].score > minConfidence) && (keypoints[LEFTELBOW].position.y < keypoints[LEFTSHOULDER].position.y) ||
+        (keypoints[LEFTWRIST].score > minConfidence) && (keypoints[LEFTWRIST].position.y < keypoints[LEFTSHOULDER].position.y)){
+            positions.push(UP);
+        }else{
+            positions.push(DOWN);
+        }
     }else{
-        positions.push(DOWN);  // down
+        position.push(0);
     }
 
-    if((keypoints[RIGHTELBOW].score > 0.5) && (keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y) ||
-    (keypoints[RIGHTWRIST].score > 0.5) && (keypoints[RIGHTWRIST].position.y < keypoints[RIGHTSHOULDER].position.y)){
-        positions.push(UP);  // up
+    if((keypoints[RIGHTELBOW].score > minConfidence) || (keypoints[RIGHTWRIST].score > minConfidence)){
+        if((keypoints[RIGHTELBOW].score > minConfidence) && (keypoints[RIGHTELBOW].position.y < keypoints[RIGHTSHOULDER].position.y) ||
+        (keypoints[RIGHTWRIST].score > minConfidence) && (keypoints[RIGHTWRIST].position.y < keypoints[RIGHTSHOULDER].position.y)){
+            positions.push(UP);
+        }else{
+            positions.push(DOWN);
+        }
     }else{
-        positions.push(DOWN);  // down
+        position.push(0);
+    }
+
+    if(keypoints[LEFTWRIST].score > minConfidence){
+        if(keypoints[LEFTWRIST].position.x > keypoints[LEFTSHOULDER].position.x){
+            positions.push(LEFT);
+        }else{
+            positions.push(RIGHT);
+        }
+    }else{
+        position.push(0);
+    }
+
+    if(keypoints[RIGHTWRIST].score > minConfidence){
+        if(keypoints[LEFTWRIST].position.x > keypoints[LEFTSHOULDER].position.x){
+            positions.push(LEFT);
+        }else{
+            positions.push(RIGHT);
+        }
+    }else{
+        position.push(0);
     }
 
     return positions
@@ -329,23 +385,79 @@ function judge_genkaku(keypoints){
     angles = getAngles(keypoints);
     positions = get_positions(keypoints);
     // left elbow - right elbow - left shoulder - right shoulder
-    if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 130) && (80 < angles[3] && angles[3] < 130) && positions[0] == DOWN && positions[1] == DOWN)
+    if ( 150 < angles[ANG_LELBOW] &&
+        150 < angles[ANG_RELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 130) &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 130) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == DOWN)
         return 0;
-    else if (160 < angles[0] && 160 < angles[1] && 160 < angles[2] && 160 < angles[3])
+    else if ((160 < angles[ANG_LELBOW] &&
+        160 < angles[ANG_RELBOW] &&
+        160 < angles[ANG_LSHOULDER] &&
+        160 < angles[ANG_RSHOULDER]) ||
+        (160 < angles[ANG_LSHOULDERW] &&
+        160 < angles[ANG_RSHOULDERW]))
         return 1;
-    else if (150 < angles[0] && 140 < angles[1] && (80 < angles[2] && angles[2] < 145) && (80 < angles[3] && angles[3] < 135) && positions[0] == DOWN && positions[1] == UP)
+    else if ((150 < angles[ANG_LELBOW] &&
+        140 < angles[ANG_RELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 145) &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 135) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        (150 < angles[ANG_LELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 145) &&
+        angles[ANG_RSHOULDERWN] < 50 &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == UP))
         return 2;
-    else if (140 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && (80 < angles[3] && angles[3] < 145) && positions[0] == UP && positions[1] == DOWN)
+    else if ((140 < angles[ANG_LELBOW] &&
+        150 < angles[ANG_RELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 135) &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 145) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == DOWN) ||
+        (150 < angles[ANG_RELBOW] &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 145) &&
+        angles[ANG_LSHOULDERWN] < 50 &&
+        positions[RIGHTHAND_UPDOWN] == DOWN &&
+        positions[LEFTHAND_UPDOWN] == UP))
         return -2;
-    else if (150 < angles[0] && 150 < angles[1] && (145 < angles[2] && angles[2] < 165) && (135 < angles[3] && angles[3] < 165) && positions[0] == UP && positions[1] == DOWN)
+    else if (150 < angles[ANG_LELBOW] &&
+        150 < angles[ANG_RELBOW] &&
+        (145 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
+        (135 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == DOWN)
         return 3;
-    else if (150 < angles[0] && 150 < angles[1] && (135 < angles[2] && angles[2] < 165) && (145 < angles[3] && angles[3] < 165) && positions[0] == DOWN && positions[1] == UP)
+    else if (150 < angles[ANG_LELBOW] &&
+        150 < angles[ANG_RELBOW] &&
+        (135 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 165) &&
+        (145 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 165) &&
+        positions[LEFTHAND_UPDOWN] == DOWN &&
+        positions[RIGHTHAND_UPDOWN] == UP)
         return 4;
-    else if ((angles[0] < 120 && angles[0] != -1) && (angles[1] < 120 && angles[1] != -1) && positions[0] == UP && positions[1] == UP)
+    else if ((angles[ANG_LELBOW] < 120 && angles[ANG_LELBOW] != -1) &&
+        (angles[ANG_RELBOW] < 120 && angles[ANG_RELBOW] != -1) &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        positions[RIGHTHAND_UPDOWN] == UP)
         return 5;
-    else if (150 < angles[1] && (80 < angles[2] && angles[2] < 145) && 165 < angles[3] && positions[0] == UP)
+    else if ((150 < angles[ANG_RELBOW] &&
+        (80 < angles[ANG_LSHOULDER] && angles[ANG_LSHOULDER] < 145) &&
+        165 < angles[ANG_RSHOULDER] &&
+        positions[LEFTHAND_UPDOWN] == UP) ||
+        (165 < angles[ANG_RSHOULDERW] &&
+        positions[LEFTHAND_UPDOWN] == UP &&
+        position[LEFTHAND_LR] == RIGHT))
         return 6;
-    else if (150 < angles[0] && 150 < angles[1] && 165 < angles[2] && (80 < angles[3] && angles[3] < 130) && positions[1] == UP)
+    else if ((150 < angles[ANG_LELBOW] &&
+        150 < angles[ANG_RELBOW] &&
+        165 < angles[ANG_LSHOULDER] &&
+        (80 < angles[ANG_RSHOULDER] && angles[ANG_RSHOULDER] < 130) &&
+        positions[RIGHTHAND_UPDOWN] == UP) ||
+        (160 < angles[ANG_LSHOULDERW] &&
+        angles[ANG_RSHOULDERWN] < 50 &&
+        positions[RIGHTHAND_UPDOWN] == UP))
         return 7;
     else if (150 < angles[0] && 150 < angles[1] && (80 < angles[2] && angles[2] < 135) && 165 < angles[3] && positions[0] == DOWN)
         return 8;
