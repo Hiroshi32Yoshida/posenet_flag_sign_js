@@ -159,10 +159,10 @@ function detectPoseInRealTime(video, net) {
 
             ctx.font = "18px sans-serif";
             ctx.fillStyle = "lightgray";
-            ctx.fillText('angle from eyes:', 10, contentHeight - 95);
+            ctx.fillText('angle of arms and nose:' + angles[4].toFixed(1), 10, contentHeight - 80);
             ctx.fill();
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 80);
-            ctx.fill();
+            //ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left wrist: ' + angles[2].toFixed(1) + ', right wrist: ' + angles[3].toFixed(1), 15, contentHeight - 80);
+            //ctx.fill();
             ctx.fillText('Distance from nose:', 10, contentHeight - 65)
             ctx.fill();
             ctx.fillText('left elbow: ' + getDistFromNose(keypoints, LEFTELBOW).toFixed(1) + ', right elbow: ' + getDistFromNose(keypoints, RIGHTELBOW).toFixed(1) + ', left wrist: ' + getDistFromNose(keypoints, LEFTWRIST).toFixed(1) + ', right wrist: ' + getDistFromNose(keypoints, RIGHTWRIST).toFixed(1), 15, contentHeight - 50);
@@ -213,11 +213,31 @@ function drawKeypoints(keypoints, confidence, ctx, scale = 1) {
   }
 }
 
-function getDistFromNose(keypoints, point){
-    if(keypoints[point].score < minConfidence){
+function getDistance(keypoints, point0, point1){
+    if(keypoints[point0].score < minConfidence || keypoints[point1].score < minConfidence){
         return -1;
     }
-    return Math.sqrt( Math.pow( keypoints[point].position.x - keypoints[NOSE].position.x, 2) + Math.pow( keypoints[point].position.y - keypoints[NOSE].position.y, 2));
+    return Math.sqrt( Math.pow( keypoints[point1].position.x - keypoints[point0].position.x, 2) + Math.pow( keypoints[point1].position.y - keypoints[point0].position.y, 2));
+}
+
+function getDistFromNose(keypoints, point){
+    return getDistance(keypoints, point, NOSE);
+}
+
+function getStretchingArm(keypoints, point){
+    switch(point){
+        case LEFTWRIST:
+            if(getDistFromNose(keypoints, LEFTSHOULDER) * 2 < getDistance(keypoints, LEFTSHOULDER, LEFTWRIST)){
+                return true;
+            }
+            return false;
+        case RIGHTWRIST:
+            if(getDistFromNose(keypoints, RIGHTSHOULDER) * 2 < getDistance(keypoints, RIGHTSHOULDER, RIGHTWRIST)){
+                return true;
+            }
+            return false;
+        default: return false;
+    }
 }
 
 function getAngles(keypoints) {
@@ -240,6 +260,10 @@ function getAngles(keypoints) {
   
    // 右手
    deg = calculateInternalAngle(keypoints, RIGHTEYE, RIGHTWRIST, LEFTEYE, minConfidence);
+   angles.push(deg);
+
+   // 両手と鼻
+   deg = calculateInternalAngle(keypoints, NOSE, RIGHTWRIST, LEFTWRIST, minConfidence);
    angles.push(deg);
 
    return angles;
