@@ -30,6 +30,10 @@ const RIGHTANKLE = 16;
 const UP = 1;
 const DOWN = 2;
 
+const EXTENDED = 0;
+const FOLDED = 1;
+const UNKNOWN = -1;
+
 let genkaku = -1;
 let count = 0;
 let seq_genkaku = [];
@@ -227,18 +231,29 @@ function getDistFromNose(keypoints, point){
 }
 
 function getStretchingArm(keypoints, point){
+    fromNose = 0;
+    dist = 0;
     switch(point){
         case LEFTWRIST:
-            if(getDistFromNose(keypoints, LEFTSHOULDER) * 2 < getDistance(keypoints, LEFTSHOULDER, LEFTWRIST)){
-                return true;
-            }
-            return false;
+            fromNose = getDistFromNose(keypoints, LEFTSHOULDER);
+            dist = getDistance(keypoints, LEFTSHOULDER, LEFTWRIST);
+            break;
         case RIGHTWRIST:
-            if(getDistFromNose(keypoints, RIGHTSHOULDER) * 2 < getDistance(keypoints, RIGHTSHOULDER, RIGHTWRIST)){
-                return true;
-            }
-            return false;
-        default: return false;
+            fromNose = getDistFromNose(keypoints, RIGHTSHOULDER);
+            dist = getDistance(keypoints, RIGHTSHOULDER, RIGHTWRIST);
+            break;
+        default: return UNKNOWN;
+    }
+
+    if(fromNose == -1 || dist == -1){
+        return UNKNOWN;
+    }
+
+    if(fromNose * 2 < dist){
+        return EXTENDED;
+    }
+    else{
+        return FOLDED;
     }
 }
 
