@@ -7,7 +7,7 @@ const videoHeight = 600;
 const colors = ["red","blue","green"];
 const fontLayout = "bold 40px sans-serif";
 const color = 'aqua';
-const minConfidence = 0.4;
+const minConfidence = 0.5;
 
 const NOSE = 0;
 const LEFTEYE = 1;
