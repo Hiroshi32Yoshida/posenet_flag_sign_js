@@ -185,7 +185,6 @@ async function bindPage() {
     multiplier: guiState.input.multiplier,
     quantBytes: guiState.input.quantBytes
   });
-  toggleLoadingUI(false);
 
   let video;
 
