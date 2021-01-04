@@ -72,8 +72,19 @@ function isMobile() {
     return isAndroid() || isiOS();
 }
 
+const defaultQuantBytes = 2;
+const defaultMobileNetMultiplier = isMobile() ? 0.50 : 0.75;
+const defaultMobileNetStride = 16;
+const defaultMobileNetInputResolution = 500;
+
 async function bindPage() {
-    const net = await posenet.load();
+    const net = await posenet.load({
+        architecture: 'MobileNetV1',
+        outputStride: defaultMobileNetStride,
+        inputResolution: defaultMobileNetInputResolution,
+        multiplier: defaultMobileNetMultiplier,
+        quantBytes: defaultQuantBytes
+      });
     let video;
     try {
         video = await loadVideo();
