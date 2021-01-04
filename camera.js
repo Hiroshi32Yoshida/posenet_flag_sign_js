@@ -361,6 +361,7 @@ async function bindPage() {
     quantBytes: guiState.input.quantBytes
   });
 
+  
   let video;
 
   try {
