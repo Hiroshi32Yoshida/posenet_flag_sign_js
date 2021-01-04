@@ -298,84 +298,6 @@ async function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
 
-  if (guiState.changeToArchitecture) {
-    // Important to purge variables and free up GPU memory
-    guiState.net.dispose();
-    toggleLoadingUI(true);
-    guiState.net = await posenet.load({
-      architecture: guiState.changeToArchitecture,
-      outputStride: guiState.outputStride,
-      inputResolution: guiState.inputResolution,
-      multiplier: guiState.multiplier,
-    });
-    toggleLoadingUI(false);
-    guiState.architecture = guiState.changeToArchitecture;
-    guiState.changeToArchitecture = null;
-  }
-
-  if (guiState.changeToMultiplier) {
-    guiState.net.dispose();
-    toggleLoadingUI(true);
-    guiState.net = await posenet.load({
-      architecture: guiState.architecture,
-      outputStride: guiState.outputStride,
-      inputResolution: guiState.inputResolution,
-      multiplier: +guiState.changeToMultiplier,
-      quantBytes: guiState.quantBytes
-    });
-    toggleLoadingUI(false);
-    guiState.multiplier = +guiState.changeToMultiplier;
-    guiState.changeToMultiplier = null;
-  }
-
-  if (guiState.changeToOutputStride) {
-    // Important to purge variables and free up GPU memory
-    guiState.net.dispose();
-    toggleLoadingUI(true);
-    guiState.net = await posenet.load({
-      architecture: guiState.architecture,
-      outputStride: +guiState.changeToOutputStride,
-      inputResolution: guiState.inputResolution,
-      multiplier: guiState.multiplier,
-      quantBytes: guiState.quantBytes
-    });
-    toggleLoadingUI(false);
-    guiState.outputStride = +guiState.changeToOutputStride;
-    guiState.changeToOutputStride = null;
-  }
-
-  if (guiState.changeToInputResolution) {
-    // Important to purge variables and free up GPU memory
-    guiState.net.dispose();
-    toggleLoadingUI(true);
-    guiState.net = await posenet.load({
-      architecture: guiState.architecture,
-      outputStride: guiState.outputStride,
-      inputResolution: +guiState.changeToInputResolution,
-      multiplier: guiState.multiplier,
-      quantBytes: guiState.quantBytes
-    });
-    toggleLoadingUI(false);
-    guiState.inputResolution = +guiState.changeToInputResolution;
-    guiState.changeToInputResolution = null;
-  }
-
-  if (guiState.changeToQuantBytes) {
-    // Important to purge variables and free up GPU memory
-    guiState.net.dispose();
-    toggleLoadingUI(true);
-    guiState.net = await posenet.load({
-      architecture: guiState.architecture,
-      outputStride: guiState.outputStride,
-      inputResolution: guiState.inputResolution,
-      multiplier: guiState.multiplier,
-      quantBytes: guiState.changeToQuantBytes
-    });
-    toggleLoadingUI(false);
-    guiState.quantBytes = guiState.changeToQuantBytes;
-    guiState.changeToQuantBytes = null;
-  }
-
   // since images are being fed from a webcam, we want to feed in the
   // original image and then just flip the keypoints' x coordinates. If instead
   // we flip the image, then correcting left-right keypoint pairs requires a
@@ -431,7 +353,6 @@ async function detectPoseInRealTime(video, net) {
  * available camera devices, and setting off the detectPoseInRealTime function.
  */
 async function bindPage() {
-  toggleLoadingUI(true);
   const net = await posenet.load({
     architecture: guiState.input.architecture,
     outputStride: guiState.input.outputStride,
@@ -439,7 +360,6 @@ async function bindPage() {
     multiplier: guiState.input.multiplier,
     quantBytes: guiState.input.quantBytes
   });
-  toggleLoadingUI(false);
 
   let video;
 
