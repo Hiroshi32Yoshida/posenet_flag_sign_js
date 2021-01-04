@@ -401,12 +401,12 @@ function judge_genkaku(keypoints){
         positions[LEFTHAND_UPDOWN] == DOWN &&
         positions[RIGHTHAND_UPDOWN] == DOWN)
         return 0;
-    else if ((160 < angles[ANG_LELBOW] &&
-        160 < angles[ANG_RELBOW] &&
-        160 < angles[ANG_LSHOULDER] &&
-        160 < angles[ANG_RSHOULDER]) ||
-        (160 < angles[ANG_LSHOULDERW] &&
-        160 < angles[ANG_RSHOULDERW]))
+    else if ((155 < angles[ANG_LELBOW] &&
+        155 < angles[ANG_RELBOW] &&
+        155 < angles[ANG_LSHOULDER] &&
+        155 < angles[ANG_RSHOULDER]) ||
+        (155 < angles[ANG_LSHOULDERW] &&
+        155 < angles[ANG_RSHOULDERW]))
         return 1;
     else if ((150 < angles[ANG_LELBOW] &&
         140 < angles[ANG_RELBOW] &&
