@@ -17,6 +17,7 @@
 const videoWidth = 600;
 const videoHeight = 500;
 const stats = new Stats();
+const color = 'aqua';
 
 function isAndroid() {
   return /Android/i.test(navigator.userAgent);
