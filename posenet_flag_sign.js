@@ -152,7 +152,6 @@ function detectPoseInRealTime(video, net) {
         poses.forEach(({ s, keypoints }) => {
 	        drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, minConfidence, ctx);
-            //drawSkeleton(keypoints, 0.5, ctx);
 
             result = judge_genkaku(keypoints);
             if(result != -1){
