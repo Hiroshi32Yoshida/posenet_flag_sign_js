@@ -120,7 +120,7 @@ function setupFPS() {
  * happens. This function loops with a requestAnimationFrame method.
  */
 function detectPoseInRealTime(video, net) {
-  const canvas = document.getElementById('output');
+  const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
   // since images are being fed from a webcam, we want to feed in the
