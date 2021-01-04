@@ -129,7 +129,7 @@ async function setupCamera() {
 }
 
 function detectPoseInRealTime(video, net) {
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById('output');
     const ctx = canvas.getContext('2d');
     const flipHorizontal = false; // since images are being fed from a webcam
 
