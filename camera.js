@@ -139,7 +139,7 @@ function detectPoseInRealTime(video, net) {
     let poses = [];
     let minPoseConfidence;
     let minPartConfidence;
-    const pose = await guiState.net.estimatePoses(video, {
+    const pose = await net.estimatePoses(video, {
       flipHorizontal: flipPoseHorizontal,
       decodingMethod: 'single-person'
     });
