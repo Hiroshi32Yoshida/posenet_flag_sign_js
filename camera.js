@@ -200,7 +200,6 @@ export async function bindPage() {
     throw e;
   }
 
-  setupGui([], net);
   setupFPS();
   detectPoseInRealTime(video, net);
 }
@@ -209,3 +208,26 @@ navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 // kick off the demo
 bindPage();
+
+function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 3 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+/**
+ * Draw pose keypoints onto a canvas
+ */
+function drawKeypoints(keypoints, confidence, ctx, scale = 1) {
+  for (let i = 0; i < keypoints.length; i++) {
+    const keypoint = keypoints[i];
+
+    if (keypoint.score < confidence) {
+      continue;
+    }
+
+    const {y, x} = keypoint.position;
+    drawPoint(ctx, y * scale, x * scale, 3, color);
+  }
+}
