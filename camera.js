@@ -198,7 +198,7 @@ async function bindPage() {
     throw e;
   }
 
-  setupFPS();
+  //setupFPS();
   detectPoseInRealTime(video, net);
 }
 
