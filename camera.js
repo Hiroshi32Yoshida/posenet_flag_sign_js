@@ -177,8 +177,7 @@ function detectPoseInRealTime(video, net) {
  * Kicks off the demo by loading the posenet model, finding and loading
  * available camera devices, and setting off the detectPoseInRealTime function.
  */
-export async function bindPage() {
-  toggleLoadingUI(true);
+async function bindPage() {
   const net = await posenet.load({
     architecture: guiState.input.architecture,
     outputStride: guiState.input.outputStride,
