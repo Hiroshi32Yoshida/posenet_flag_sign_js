@@ -1,4 +1,4 @@
-const imageScaleFactor = 0.4;
+const imageScaleFactor = 0.2;
 const outputStride = 16;
 const flipHorizontal = false;
 const stats = new Stats();
@@ -151,7 +151,7 @@ function detectPoseInRealTime(video, net) {
         let deg;
 
         poses.forEach(({ s, keypoints }) => {
-	        drawBP(keypoints[0],keypoints[1],ctx);
+	        //drawBP(keypoints[0],keypoints[1],ctx);
             drawKeypoints(keypoints, minConfidence, ctx);
 
             result = judge_genkaku(keypoints);
@@ -188,22 +188,22 @@ function detectPoseInRealTime(video, net) {
             ctx.fillStyle = "red";
             ctx.fillText(curText, 20, 40);
 
-            ctx.font = "18px sans-serif";
-            ctx.fillStyle = "blue";
-            ctx.fillText('[arm and nose angles]left: ' + angles[6].toFixed(1) + ', right: ' + angles[7].toFixed(1), 10, videoHeight - 95);
-            ctx.fill();
-            ctx.fillText('[stretching arms]left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, videoHeight - 80);
-            ctx.fill();
-            ctx.fillText('[Angles]', 10, videoHeight - 65)
-            ctx.fill();
-            ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left shoulder: ' + angles[2].toFixed(1) + ', right shoulder: ' + angles[3].toFixed(1), 20, videoHeight - 50);
-            ctx.fill();
-            ctx.fillText('[score]left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, videoHeight - 35);
-            ctx.fill();
-            ctx.fillText('[score]left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, videoHeight - 20);
-            ctx.fill();
-            ctx.fillText('[score]left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, videoHeight - 5);
-            ctx.fill();
+            //ctx.font = "18px sans-serif";
+            //ctx.fillStyle = "blue";
+            //ctx.fillText('[arm and nose angles]left: ' + angles[6].toFixed(1) + ', right: ' + angles[7].toFixed(1), 10, videoHeight - 95);
+            //ctx.fill();
+            //ctx.fillText('[stretching arms]left: ' + getStretchingArm(keypoints, LEFTWRIST).toString() + ', right: ' + getStretchingArm(keypoints, RIGHTWRIST).toString(), 10, videoHeight - 80);
+            //ctx.fill();
+            //ctx.fillText('[Angles]', 10, videoHeight - 65)
+            //ctx.fill();
+            //ctx.fillText('left elbow: ' + angles[0].toFixed(1) + ', right elbow: ' + angles[1].toFixed(1) + ', left shoulder: ' + angles[2].toFixed(1) + ', right shoulder: ' + angles[3].toFixed(1), 20, videoHeight - 50);
+            //ctx.fill();
+            //ctx.fillText('[score]left wrist: ' + keypoints[LEFTWRIST].score.toFixed(3) + ' right wrist: ' + keypoints[RIGHTWRIST].score.toFixed(3), 10, videoHeight - 35);
+            //ctx.fill();
+            //ctx.fillText('[score]left elbow: ' + keypoints[LEFTELBOW].score.toFixed(3) + ' right elbow: ' + keypoints[RIGHTELBOW].score.toFixed(3), 10, videoHeight - 20);
+            //ctx.fill();
+            //ctx.fillText('[score]left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, videoHeight - 5);
+            //ctx.fill();
         });
 
         stats.end();
