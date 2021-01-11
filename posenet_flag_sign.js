@@ -105,7 +105,7 @@ const mobile = isMobile();
  
 async function setupCamera() {
     const video = document.getElementById('video');
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia || isiOS()) {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
             'audio': false,
             'video': {
