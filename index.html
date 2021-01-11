@@ -5,18 +5,16 @@
     <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
   </head>
   <body>
-    <table hight="800"><tbody>
-    <tr><td hight="600">
+    <div>
         <video id="video" width="800px" height="600px" autoplay="1" style="position:absolute;"></video>
-        <canvas id="output" width="800px" height="600px" style="position:absolute;"></canvas>
-    </td></tr>
-    <tr><td>
+        <canvas id="output" width="800px" height="600px" style="position: relative;"></canvas>
+    </div>
+    <div>
         <p>※原姿は便宜上「0」になります。<BR>
         ※原画「11」またはカナ「く」は-11→11でできます。<BR>
         ※原画1→10→1→0を打つと文字がリセットされます
         </P>
-    </td></tr>
-    </tbody></table>
+    </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
   <script src="posenet_flag_sign.js"></script>

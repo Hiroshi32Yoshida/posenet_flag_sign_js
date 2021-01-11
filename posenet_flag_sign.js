@@ -110,7 +110,7 @@ async function setupCamera() {
             'audio': false,
             'video': {
                 facingMode: 'user',
-                aspectRatio: { exact: 1.7777777778 },
+                //aspectRatio: { exact: 1.7777777778 },
                 width: mobile ? undefined : videoWidth,
                 height: mobile ? undefined : videoHeight,
               }
