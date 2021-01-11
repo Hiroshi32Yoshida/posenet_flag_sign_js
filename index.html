@@ -1,22 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
+    <title>Flag Semaphore reading web - S10 test</title>
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: black;
+        }
+
+        .footer-text {
+            max-width: 600px;
+            text-align: left;
+            margin: auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            .footer-text,
+            .dg {
+                display: none;
+            }
+        }
+
+        /*
+         *  The following loading spinner CSS is from SpinKit project
+         *  https://github.com/tobiasahlin/SpinKit
+         */
+        .sk-spinner-pulse {
+            width: 20px;
+            height: 20px;
+            margin: auto 10px;
+            float: left;
+            background-color: #333;
+            border-radius: 100%;
+            -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+            animation: sk-pulseScaleOut 1s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes sk-pulseScaleOut {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sk-pulseScaleOut {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        .spinner-text {
+            float: left;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/@tensorflow/tfjs"></script>
     <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
-  </head>
-  <body>
-    <div>
-        <!--<video id="video" width="800px" height="600px" autoplay="1" style="position:absolute;"></video>-->
-        <video id="video" width="800px" height="600px" style="position:absolute;"></video>
-        <canvas id="output" width="800px" height="600px" style="position: relative;"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.1/dat.gui.min.js"></script>
+</head>
+
+<body>
+    <div id="info" style='display:none'>
     </div>
-    <div>
-        <p>※原姿は便宜上「0」になります。<BR>
-        ※原画「11」またはカナ「く」は-11→11でできます。<BR>
-        ※原画1→10→1→0を打つと文字がリセットされます
-        </P>
+    <div id="loading" style='display:flex'>
+        <div class="spinner-text">
+            Loading PoseNet model...
+        </div>
+        <div class="sk-spinner sk-spinner-pulse"></div>
     </div>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
-  <script src="posenet_flag_sign.js"></script>
+    <div id='main' style='display:none'>
+        <video id="video" playsinline style="display: none;">
+        </video>
+        <canvas id="output" />
+    </div>
+    <div class="footer">
+        <div class="footer-text">
+            <p><b>手旗読取りWeb</b><br>
+                ※原姿は便宜上「0」になります。<BR>
+                ※原画「11」またはカナ「く」は-11→11でできます。<BR>
+                ※原画1→10→1→0を打つと文字がリセットされます
+            </p>
+        </div>
+    </div>
+    <script src="posenet_flag_sem.js"></script>
+</body>
+
 </html>
