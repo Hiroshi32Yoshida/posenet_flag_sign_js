@@ -4,8 +4,17 @@
 <head>
     <title>Flag Semaphore reading web - S10 test</title>
     <style>
+        .container {
+            display: grid;
+        }
+
+        .top {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
         .footer {
-            position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -16,6 +25,17 @@
             max-width: 600px;
             text-align: left;
             margin: auto;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        ul, ol {
+            background: #fffcf4;
+            border-radius :8px;/*角の丸み*/
+            box-shadow :0px 0px 5px silver;/*5px=影の広がり具合*/
+            padding: 0.5em 0.5em 0.5em 2em;
+        }
+        ul li, ol li {
+            line-height: 1.5;
+            padding: 0.5em 0;
         }
 
         @media only screen and (max-width: 600px) {
@@ -76,29 +96,43 @@
     <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.1/dat.gui.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div id="info" style='display:none'>
-    </div>
-    <div id="loading" style='display:flex'>
-        <div class="spinner-text">
-            Loading PoseNet model...
+    <div class="top">
+        <div id="info" style='display:none'>
         </div>
-        <div class="sk-spinner sk-spinner-pulse"></div>
-    </div>
-    <div id='main' style='display:none'>
-        <video id="video" playsinline style="display: none;">
-        </video>
-        <canvas id="output" />
+        <div id="loading" style='display:flex'>
+            <div class="spinner-text">
+                Loading PoseNet model...
+            </div>
+            <div class="sk-spinner sk-spinner-pulse"></div>
+        </div>
+        <div id='main' style='display:none'>
+            <video id="video" playsinline style="display: none;">
+            </video>
+            <canvas id="output" />
+        </div>
     </div>
     <div class="footer">
         <div class="footer-text">
-            <p><b>手旗読取りWeb</b><br>
-                ※原姿は便宜上「0」になります。<BR>
-                ※原画「11」またはカナ「く」は-11→11でできます。<BR>
-                ※原画1→10→1→0を打つと文字がリセットされます
-            </p>
+            <h1>⚜️手旗読取りWeb⚜️</h1>
+            <h2>使い方</h2>
+            <ul>
+                <li>カメラの前でなるべく全身が映るように立ってください</li>
+                <li>原画を正しく打つと画面にその数字が表示されます</li>
+                <li>原画「0」は対応していません。便宜上「原姿」を「0」としています</li>
+                <li>11は左上（-11と表示）に続いて右下（11と表示）を認識すると「11」と判定します</li>
+                <li>原姿（0）→1→10→1→原姿（0）と打つと表示されているカナがリセットされます</li>
+            </ul>
+            <h2>注意点</h2>
+            <ul>
+                <li>背景はなるべくゴチャゴチャしていない方が良いです</li>
+                <li>体（服装）は背景と区別できる色の方が良いです（コントラストがある方が良い）</li>
+                <li>手旗は持たないでください💦</li>
+            </ul>
         </div>
     </div>
     <script src="posenet_flag_sem.js"></script>
