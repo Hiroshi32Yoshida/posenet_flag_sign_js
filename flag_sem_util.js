@@ -60,7 +60,7 @@ function drawPoint(ctx, y, x, r, color) {
     ctx.fillStyle = color;
     ctx.fill();
 }
-  
+
 /**
  * Draws a line on a canvas, i.e. a joint
  */
@@ -157,45 +157,48 @@ function drawDebugText(keypoints, minConfidence, color, ctx) {
     ctx.fillText('[score]left shoulder: ' + keypoints[LEFTSHOULDER].score.toFixed(3) + ' right shoulder: ' + keypoints[RIGHTSHOULDER].score.toFixed(3), 10, videoHeight - 5);
     ctx.fill();
 }
+
 function getAngles(keypoints, minConfidence) {
     var angles = [];
   
-    // 左肘
+    // left elbow
     deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER, minConfidence);
     angles.push(deg);
   
-    // 右肘
+    // right elbow
     deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER, minConfidence);
     angles.push(deg);
    
-    // 左肩（肘との内角）
+    // left shoulder - elbow
     deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTELBOW, RIGHTSHOULDER, minConfidence);
     angles.push(deg);
    
-    // 右肩（肘との内角）
+    // right shoulder - elbow
     deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTELBOW, LEFTSHOULDER, minConfidence);
     angles.push(deg);
   
-    // 左肩（手との内角）
+    // left shoulder - wrist
     deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTWRIST, RIGHTSHOULDER, minConfidence);
     angles.push(deg);
    
-    // 右肩（手との内角）
+    // right shoulder - wrist
     deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTWRIST, LEFTSHOULDER, minConfidence);
     angles.push(deg);
   
-    // 左肩（手と鼻の内角）
+    // left shoulder - internal angles of hands and nose
     deg = calculateInternalAngle(keypoints, LEFTSHOULDER, NOSE, LEFTWRIST, minConfidence);
     angles.push(deg);
   
-    // 右肩（手と鼻の内角）
+    // right shoulder - internal angles of hands and nose
     deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, NOSE, RIGHTWRIST, minConfidence);
     angles.push(deg);
-  
+
     return angles;
 }
-  
-// 内角を求める
+
+/*
+ * calculate internal angle
+ */
 function calculateInternalAngle(keypoints, point0, point1, point2, confidence) {
     if(keypoints[point0].score < confidence || keypoints[point1].score < confidence || keypoints[point2].score < confidence){
         return -1;
@@ -208,10 +211,10 @@ function calculateInternalAngle(keypoints, point0, point1, point2, confidence) {
     var absA = Math.sqrt(a.x*a.x + a.y*a.y);
     var absB = Math.sqrt(b.x*b.x + b.y*b.y);
 
-    //dot = |a||b|cosθという公式より
-    var cosTheta = dot / (absA*absB);
+    //dot = |a||b|cosθ
+    var cosTheta = dot/(absA*absB);
      
-    //cosθの逆関数
+    //acosθ
     var theta = Math.acos(cosTheta) * 180 / Math.PI;
 
     return theta;

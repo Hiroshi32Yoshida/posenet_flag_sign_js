@@ -9,10 +9,6 @@ let bpface = new Image();
 let navScale = 1
 bpface.src = "bp_face.png"
 
-/**
- * Loads a the camera to be used in the demo
- *
- */
 async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     throw new Error(
@@ -107,24 +103,15 @@ function setupGui(cameras, net) {
   gui.add(guiState, tryResNetButtonName).name(tryResNetButtonText);
   updateTryResNetButtonDatGuiCss();
 
-  // The single-pose algorithm is faster and simpler but requires only one
-  // person to be in the frame or results will be innaccurate. Multi-pose works
-  // for more than 1 person
   const algorithmController =
       gui.add(guiState, 'algorithm', ['single-pose', 'multi-pose']);
 
-  // The input parameters have the most effect on accuracy and speed of the
-  // network
   let input = gui.addFolder('Input');
-  // Architecture: there are a few PoseNet models varying in size and
-  // accuracy. 1.01 is the largest, but will be the slowest. 0.50 is the
-  // fastest, but least accurate.
+
   architectureController =
       input.add(guiState.input, 'architecture', ['MobileNetV1', 'ResNet50']);
   guiState.architecture = guiState.input.architecture;
-  // Input resolution:  Internally, this parameter affects the height and width
-  // of the layers in the neural network. The higher the value of the input
-  // resolution the better the accuracy but slower the speed.
+
   let inputResolutionController = null;
   function updateGuiInputResolution(
       inputResolution,
@@ -142,10 +129,6 @@ function setupGui(cameras, net) {
     });
   }
 
-  // Output stride:  Internally, this parameter affects the height and width of
-  // the layers in the neural network. The lower the value of the output stride
-  // the higher the accuracy but slower the speed, the higher the value the
-  // faster the speed but lower the accuracy.
   let outputStrideController = null;
   function updateGuiOutputStride(outputStride, outputStrideArray) {
     if (outputStrideController) {
@@ -160,9 +143,6 @@ function setupGui(cameras, net) {
     });
   }
 
-  // Multiplier: this parameter affects the number of feature map channels in
-  // the MobileNet. The higher the value, the higher the accuracy but slower the
-  // speed, the lower the value the faster the speed but lower the accuracy.
   let multiplierController = null;
   function updateGuiMultiplier(multiplier, multiplierArray) {
     if (multiplierController) {
@@ -177,10 +157,6 @@ function setupGui(cameras, net) {
     });
   }
 
-  // QuantBytes: this parameter affects weight quantization in the ResNet50
-  // model. The available options are 1 byte, 2 bytes, and 4 bytes. The higher
-  // the value, the larger the model size and thus the longer the loading time,
-  // the lower the value, the shorter the loading time but lower the accuracy.
   let quantBytesController = null;
   function updateGuiQuantBytes(quantBytes, quantBytesArray) {
     if (quantBytesController) {
@@ -214,10 +190,6 @@ function setupGui(cameras, net) {
 
   updateGui();
   //input.open();
-  // Pose confidence: the overall confidence in the estimation of a person's
-  // pose (i.e. a person detected in a frame)
-  // Min part confidence: the confidence that a particular estimated keypoint
-  // position is accurate (i.e. the elbow's position)
   let single = gui.addFolder('Single Pose Detection');
   single.add(guiState.singlePoseDetection, 'minPoseConfidence', 0.0, 1.0);
   single.add(guiState.singlePoseDetection, 'minPartConfidence', 0.0, 1.0);
@@ -273,18 +245,10 @@ function setupFPS() {
   document.getElementById('main').appendChild(stats.dom);
 }
 
-/**
- * Feeds an image to posenet to estimate poses - this is where the magic
- * happens. This function loops with a requestAnimationFrame method.
- */
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
 
-  // since images are being fed from a webcam, we want to feed in the
-  // original image and then just flip the keypoints' x coordinates. If instead
-  // we flip the image, then correcting left-right keypoint pairs requires a
-  // permutation on all the keypoints.
   const flipPoseHorizontal = false;
 
   canvas.width = videoWidth;
@@ -415,9 +379,6 @@ function detectPoseInRealTime(video, net) {
     let genkakusize = Math.floor(exwidth/3);
     let strsize = Math.floor(exwidth/10);
 
-    // For each pose (i.e. person) detected in an image, loop through the poses
-    // and draw the resulting skeleton and keypoints if over certain confidence
-    // scores
     poses.forEach(({score, keypoints}) => {
       if (score >= minPoseConfidence) {
         if (guiState.output.showPoints) {
@@ -479,10 +440,6 @@ function detectPoseInRealTime(video, net) {
   poseDetectionFrame();
 }
 
-/**
- * Kicks off the demo by loading the posenet model, finding and loading
- * available camera devices, and setting off the detectPoseInRealTime function.
- */
 async function bindPage() {
   toggleLoadingUI(true);
   const net = await posenet.load({
@@ -513,7 +470,7 @@ async function bindPage() {
 
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-// kick off the demo
+
 bindPage();
 
 const color = 'aqua';
